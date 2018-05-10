@@ -1,6 +1,9 @@
 package app;
 
 
+import resolution.IAggregate;
+import resolution.ResolutionLevel;
+
 import java.util.ArrayList;
 
 public class AggregationImpl implements IAggregate {

@@ -1,7 +1,7 @@
 package events;
 
-import app.IDeaggregate;
-import app.ResolutionLevel;
+import resolution.IDeaggregate;
+import resolution.ResolutionLevel;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 
@@ -10,13 +10,13 @@ public class DeaggregationEvent extends BasicSimStateChange<ResolutionLevel, Obj
     private IDeaggregate deaggregate;
     private ResolutionLevel parentResolutionLevel;
 
-    DeaggregationEvent(ResolutionLevel parent, double delay) throws SimControlException{
+    public DeaggregationEvent(ResolutionLevel parent, double delay) throws SimControlException{
         super(parent, delay);
         this.deaggregate = parent.getChild().getDeaggregation();
         this.parentResolutionLevel = getSimEntity();
     }
 
-    DeaggregationEvent(ResolutionLevel parent) throws SimControlException{
+    public DeaggregationEvent(ResolutionLevel parent) throws SimControlException{
         this(parent, 0.0);
     }
 

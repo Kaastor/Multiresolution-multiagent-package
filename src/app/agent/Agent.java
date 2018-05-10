@@ -1,5 +1,6 @@
-package app;
+package app.agent;
 
+import app.Context;
 import dissim.simspace.core.BasicSimEntity;
 
 public class Agent extends BasicSimEntity {
