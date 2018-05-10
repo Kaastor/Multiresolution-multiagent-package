@@ -2,5 +2,5 @@ package app;
 
 
 public interface IDeaggregate {
-    Object deaggregate();
+    Object deaggregate(Object params);
 }

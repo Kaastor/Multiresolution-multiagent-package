@@ -2,5 +2,5 @@ package app;
 
 
 public interface IAggregate {
-    Object aggregate();
+    Object aggregate(Object params);
 }

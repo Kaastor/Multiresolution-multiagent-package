@@ -3,15 +3,15 @@ package app;
 
 import dissim.simspace.core.BasicSimEntity;
 
-abstract class Level extends BasicSimEntity {
+public abstract class ResolutionLevel extends BasicSimEntity {
 
     private IAggregate aggregation;
     private IDeaggregate deaggregation;
-    private Level parent;
-    private Level child;
+    private ResolutionLevel parent;
+    private ResolutionLevel child;
     private boolean hibernated = true;
 
-    Level(Context context, Level parent, Level child, IDeaggregate deaggregation, IAggregate aggregation) {
+    ResolutionLevel(Context context, ResolutionLevel parent, ResolutionLevel child, IDeaggregate deaggregation, IAggregate aggregation) {
         super(context);
         this.parent = parent;
         this.child = child;
@@ -19,11 +19,11 @@ abstract class Level extends BasicSimEntity {
         this.aggregation = aggregation;
     }
 
-    Level(Context context, Level parent, Level child, IDeaggregate deaggregation) {
+    ResolutionLevel(Context context, ResolutionLevel parent, ResolutionLevel child, IDeaggregate deaggregation) {
         this(context, parent, child, deaggregation, null);
     }
 
-    Level(Context context, Level parent, Level child, IAggregate aggregation) {
+    ResolutionLevel(Context context, ResolutionLevel parent, ResolutionLevel child, IAggregate aggregation) {
         this(context, parent, child, null, aggregation);
     }
 
@@ -46,11 +46,11 @@ abstract class Level extends BasicSimEntity {
         return aggregation;
     }
 
-    public Level getParent() {
+    public ResolutionLevel getParent() {
         return parent;
     }
 
-    public Level getChild() {
+    public ResolutionLevel getChild() {
         return child;
     }
 

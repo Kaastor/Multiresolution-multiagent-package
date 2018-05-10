@@ -2,15 +2,16 @@ package app;
 
 
 import dissim.simspace.core.SimControlException;
+import events.AggregationEvent;
 
 import java.util.ArrayList;
 
-public class Agregat extends Level {
+public class Agregat extends ResolutionLevel {
 
     public Agregat(Context context, IAggregate impl) throws SimControlException {
         super(context, null, null, impl);
 
-        new DeaggregationEvent(this, 10);
+        new AggregationEvent(this, 10);
     }
 
     @Override
