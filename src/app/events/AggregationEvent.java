@@ -8,12 +8,12 @@ import dissim.simspace.core.SimControlException;
 public class AggregationEvent extends BasicSimStateChange<ResolutionLevel, Object> {
 
     private IAggregate aggregate;
-    private ResolutionLevel parentResolutionLevel;
+    private ResolutionLevel resolutionLevel;
 
     public AggregationEvent(ResolutionLevel parent, double delay) throws SimControlException{
         super(parent, delay);
         this.aggregate = parent.getAggregation();
-        this.parentResolutionLevel = getSimEntity();
+        this.resolutionLevel = getSimEntity();
     }
 
     public AggregationEvent(ResolutionLevel parent) throws SimControlException{
@@ -22,8 +22,9 @@ public class AggregationEvent extends BasicSimStateChange<ResolutionLevel, Objec
 
     @Override
     protected void transition() throws SimControlException {
-        Object result = aggregate.aggregate(parentResolutionLevel);
-        parentResolutionLevel.getParent().stateChange(result);
+        resolutionLevel.getEntity().setActiveResolution(resolutionLevel.getParent());
+        Object result = aggregate.aggregate(resolutionLevel);
+        resolutionLevel.getParent().stateChange(result);
     }
 
 }

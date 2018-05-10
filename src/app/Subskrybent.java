@@ -7,10 +7,11 @@ import dissim.simspace.core.BasicSimEntity;
 
 public class Subskrybent extends BasicSimEntity implements IEventSubscriber {
 
-    int numer = 0;
+    int numer;
 
-    Subskrybent(Context context){
+    Subskrybent(Context context, int numer){
         super(context);
+        this.numer = numer;
         context.getContextEventBroker().subscribe(Zdarzenie.class, this);
         System.out.println( "Created sub");
     }
@@ -19,7 +20,7 @@ public class Subskrybent extends BasicSimEntity implements IEventSubscriber {
     public void reflect(IEvent iEvent, IEventPublisher iEventPublisher) {
         Zdarzenie zdarzenie = (Zdarzenie)iEvent;
         int numer = zdarzenie.numer;
-        System.out.println("Reflect1 - " + numer);
+        System.out.println(this.numer + " Reflect1 - " + numer);
     }
 
     @Override

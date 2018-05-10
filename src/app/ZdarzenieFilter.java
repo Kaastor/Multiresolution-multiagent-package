@@ -21,9 +21,9 @@ public class ZdarzenieFilter implements IEventFilter {
         if(iEvent.getClass() == Zdarzenie.class && ((Zdarzenie)iEvent).numer %2 != 0) { //nieparz
             Zdarzenie zdarzenie = (Zdarzenie)iEvent;
             IEventSubscriber subscriber = zdarzenie.getSimEntity().getSubskrybent();
-            this.filterResult.add(
-                    subscriber
-            );
+            IEventSubscriber subscriber2 = zdarzenie.getSimEntity().getSubskrybent2();
+            this.filterResult.add(subscriber);
+            this.filterResult.add(subscriber2);
         }
         System.out.println("Filtr result - " + filterResult.toString());
         return filterResult;
