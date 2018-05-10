@@ -1,4 +1,4 @@
-package resolution;
+package app.resolution;
 
 
 import app.Context;

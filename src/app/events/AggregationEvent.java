@@ -1,7 +1,7 @@
-package events;
+package app.events;
 
-import resolution.IAggregate;
-import resolution.ResolutionLevel;
+import app.resolution.IAggregate;
+import app.resolution.ResolutionLevel;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 

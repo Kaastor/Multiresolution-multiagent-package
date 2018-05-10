@@ -1,15 +1,14 @@
 package app;
 
 
-import resolution.IAggregate;
-import resolution.ResolutionLevel;
+import app.resolution.IAggregate;
+import app.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 
 public class AggregationImpl implements IAggregate {
 
     AggregationImpl(){
-
     }
 
     @Override

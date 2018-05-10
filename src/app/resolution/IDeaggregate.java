@@ -1,4 +1,4 @@
-package resolution;
+package app.resolution;
 
 
 public interface IDeaggregate {

@@ -3,11 +3,11 @@ package app.agent;
 import app.Context;
 import dissim.simspace.core.BasicSimEntity;
 
-public class Agent extends BasicSimEntity {
+public class BasicAgent extends BasicSimEntity {
 
     int id;
 
-    public Agent(Context context){
+    public BasicAgent(Context context){
         super(context);
     }
 
