@@ -7,13 +7,13 @@ import org.jgrapht.graph.DirectedWeightedMultigraph;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class NetworkTopology {
+public class Topology {
 
     private DirectedWeightedMultigraph<BasicAgent, Link> network =
             new DirectedWeightedMultigraph<>(Link.class);
     private ArrayList<BasicAgent> agents;
 
-    public NetworkTopology(){
+    public Topology(){
         this.agents = new ArrayList<>();
     }
 
@@ -97,7 +97,7 @@ public class NetworkTopology {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("NetworkTopology{[agents=").append(agents).append(" ], \n");
+        builder.append("Topology{[agents=").append(agents).append(" ], \n");
         for(BasicAgent agent : agents){
             builder.append("[NeighboursOf ").append(agent.toString()).append(" : ").append(getNeighbours(agent).toString()).append("\n");
         }

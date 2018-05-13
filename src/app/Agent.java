@@ -2,7 +2,7 @@ package app;
 
 
 import app.agent.BasicAgent;
-import app.network.NetworkTopology;
+import app.network.Topology;
 import dissim.broker.IEvent;
 import dissim.broker.IEventPublisher;
 import dissim.simspace.core.SimControlException;
@@ -10,9 +10,9 @@ import dissim.simspace.core.SimControlException;
 
 public class Agent extends BasicAgent{
 
-    private NetworkTopology network;
+    private Topology network;
 
-    public Agent(Context context, NetworkTopology network){
+    public Agent(Context context, Topology network){
         super(context);
         this.network = network;
         context.getContextEventBroker().subscribe(Message.class, this);
@@ -22,14 +22,13 @@ public class Agent extends BasicAgent{
     public void reflect(IEvent iEvent, IEventPublisher iEventPublisher) {
         int id = ((Agent)iEventPublisher).getId();
         System.out.println(getId() + " Got message! from " + id );
-
     }
 
     @Override
     public void reflect(IEvent iEvent) {
     }
 
-    public NetworkTopology getNetwork() {
+    public Topology getNetwork() {
         return this.network;
     }
 
