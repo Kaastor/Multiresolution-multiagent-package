@@ -1,5 +1,7 @@
 package app;
 
+import app.formation.Formation;
+import app.formation.PositionVector;
 import app.network.Topology;
 import dissim.random.SimGenerator;
 import dissim.simspace.core.BasicSimEntity;
@@ -29,6 +31,15 @@ class ObiektSymulacyjny extends BasicSimEntity {
         topology.addConnections(2, new int[]{1});
         topology.addConnections(3, new int[]{2});
 
-        System.out.println(topology.toString());
+        ArrayList<PositionVector> positionVectors = new ArrayList<>();
+        positionVectors.add(new PositionVector(0,1, new Point2D(5,0)));
+        positionVectors.add(new PositionVector(1,0, new Point2D(-5,0)));
+        positionVectors.add(new PositionVector(1,2, new Point2D(5,0)));
+        positionVectors.add(new PositionVector(2,1, new Point2D(-5,0)));
+        positionVectors.add(new PositionVector(0,3, new Point2D(5,-10)));
+        positionVectors.add(new PositionVector(3,2, new Point2D(5,10)));
+
+        Formation formation = new Formation(topology, positionVectors);
+        System.out.println(formation.toString());
     }
 }

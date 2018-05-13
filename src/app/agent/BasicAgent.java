@@ -52,7 +52,6 @@ public abstract class BasicAgent extends BasicSimEntity implements IEventSubscri
     public String toString() {
         return "BasicAgent{" +
                 "id=" + id +
-                ", position=" + position +
                 '}';
     }
 }

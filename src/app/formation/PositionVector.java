@@ -1,27 +1,26 @@
 package app.formation;
 
 
-import app.Agent;
 import javafx.geometry.Point2D;
 
 public class PositionVector {
 
-    private Agent sourceAgent;
+    private int sourceAgentId;
     private Point2D vector;
-    private Agent targetAgent;
+    private int targetAgentId;
 
-    public PositionVector(Agent sourceAgent, Point2D vector, Agent targetAgent) {
-        this.sourceAgent = sourceAgent;
+    public PositionVector(int sourceAgentId, int targetAgentId, Point2D vector) {
+        this.sourceAgentId = sourceAgentId;
         this.vector = vector;
-        this.targetAgent = targetAgent;
+        this.targetAgentId = targetAgentId;
     }
 
-    public Agent getSourceAgent() {
-        return sourceAgent;
+    public int getSourceAgentId() {
+        return sourceAgentId;
     }
 
-    public void setSourceAgent(Agent sourceAgent) {
-        this.sourceAgent = sourceAgent;
+    public void setSourceAgentId(int sourceAgentId) {
+        this.sourceAgentId = sourceAgentId;
     }
 
     public Point2D getVector() {
@@ -32,11 +31,11 @@ public class PositionVector {
         this.vector = vector;
     }
 
-    public Agent getTargetAgent() {
-        return targetAgent;
+    public int getTargetAgentId() {
+        return targetAgentId;
     }
 
-    public void setTargetAgent(Agent targetAgent) {
-        this.targetAgent = targetAgent;
+    public void setTargetAgentId(int targetAgentId) {
+        this.targetAgentId = targetAgentId;
     }
 }

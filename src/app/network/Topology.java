@@ -33,6 +33,10 @@ public class Topology {
         }
     }
 
+    public Set<Link> getAllConnections(){
+        return network.edgeSet();
+    }
+
     public boolean addAgent(BasicAgent agent) {
         agents.add(agent);
         return network.addVertex(agent);
@@ -53,6 +57,9 @@ public class Topology {
         return network.getEdge(sourceAgent, targetAgent);
     }
 
+    public Link getConnection(int sourceAgentId, int targetAgentId){
+        return network.getEdge(getAgentById(sourceAgentId), getAgentById(targetAgentId));
+    }
     public Link removeConnection(BasicAgent sourceAgent, BasicAgent targetAgent){
         return network.removeEdge(sourceAgent, targetAgent);
     }
