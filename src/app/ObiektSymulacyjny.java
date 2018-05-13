@@ -34,7 +34,7 @@ class ObiektSymulacyjny extends BasicSimEntity {
         NetworkTopology networkTopology = new NetworkTopology();
 
         Agent agent = new Agent(context);
-        networkTopology.addVertex(agent);
+        networkTopology.addAgent(agent);
         ArrayList<BasicAgent> agents = new ArrayList<>();
         for(int i = 0 ; i < 5 ; i++){
             agents.add(new Agent(context));
@@ -43,7 +43,7 @@ class ObiektSymulacyjny extends BasicSimEntity {
 //        networkTopology.addEdge(agents.get(0), agents.get(1));
         networkTopology.addConnections(agent, agents);
         ArrayList<BasicAgent> agentArrayList = networkTopology.getNeighbours(agent);
-        System.out.println(networkTopology.vertexSet());
+        System.out.println(agentArrayList);
     }
 
     public Subskrybent getSubskrybent2() {

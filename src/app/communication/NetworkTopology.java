@@ -7,39 +7,44 @@ import org.jgrapht.graph.DirectedWeightedMultigraph;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class NetworkTopology extends DirectedWeightedMultigraph<BasicAgent, Link>{
+public class NetworkTopology {
 
+    private DirectedWeightedMultigraph<BasicAgent, Link> network =
+            new DirectedWeightedMultigraph<>(Link.class);
     private ArrayList<BasicAgent> agents;
 
     public NetworkTopology(){
-        super(Link.class);
         this.agents = new ArrayList<>();
     }
 
     public void addConnection(BasicAgent sourceAgent, BasicAgent targetAgent){
-        addVertex(sourceAgent);
-        addVertex(targetAgent);
-        addEdge(sourceAgent, targetAgent);
+        addAgent(sourceAgent);
+        addAgent(targetAgent);
+        network.addEdge(sourceAgent, targetAgent);
     }
 
     public void addConnections(BasicAgent sourceAgent, ArrayList<BasicAgent> targetAgents){
-        addVertex(sourceAgent);
-        targetAgents.forEach(this::addVertex);
-        targetAgents.forEach(agent -> addEdge(sourceAgent, agent));
+        addAgent(sourceAgent);
+        targetAgents.forEach(this::addAgent);
+        targetAgents.forEach(agent -> addConnection(sourceAgent, agent));
     }
 
-    @Override
-    public boolean addVertex(BasicAgent agent) {
+    public boolean addAgent(BasicAgent agent) {
         if(!agents.contains(agent))
             agents.add(agent);
-        return super.addVertex(agent);
+        return network.addVertex(agent);
+    }
+
+    public boolean removeAgent(BasicAgent agent) {
+        agents.remove(agent);
+        return network.removeVertex(agent);
     }
 
     public ArrayList<BasicAgent> getNeighbours(BasicAgent agent){
         ArrayList<BasicAgent> neighbours = new ArrayList<>();
-        Set<Link> links = outgoingEdgesOf(agent);
+        Set<Link> links = network.outgoingEdgesOf(agent);
         for(Link link : links){
-            neighbours.add(this.getEdgeTarget(link));
+            neighbours.add(network.getEdgeTarget(link));
         }
 
         return neighbours;
