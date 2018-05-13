@@ -1,17 +1,10 @@
 package app;
 
-import app.agent.BasicAgent;
-import app.communication.Link;
-import app.communication.Message;
-import app.communication.MessageFilter;
-import app.communication.NetworkTopology;
-import app.resolution.MultiresolutionEntity;
+import app.network.NetworkTopology;
 import dissim.simspace.core.BasicSimEntity;
 import dissim.simspace.core.SimControlException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Set;
 
 class ObiektSymulacyjny extends BasicSimEntity {
 
@@ -32,5 +25,6 @@ class ObiektSymulacyjny extends BasicSimEntity {
         networkTopology.addConnections(2, new int[]{1});
         networkTopology.addConnections(3, new int[]{2});
 
+        agents.get(0).sendMessage();
     }
 }

@@ -2,13 +2,11 @@ package app;
 
 
 import app.agent.BasicAgent;
-import app.communication.Message;
-import app.communication.NetworkTopology;
+import app.network.NetworkTopology;
 import dissim.broker.IEvent;
 import dissim.broker.IEventPublisher;
 import dissim.simspace.core.SimControlException;
 
-import java.util.ArrayList;
 
 public class Agent extends BasicAgent{
 
@@ -17,21 +15,22 @@ public class Agent extends BasicAgent{
     public Agent(Context context, NetworkTopology network){
         super(context);
         this.network = network;
-        context.getContextEventBroker().subscribe(Message.class, this); //Tak musi być, inaczej nie dochodzą wiadomości
+        context.getContextEventBroker().subscribe(Message.class, this);
     }
 
     @Override
     public void reflect(IEvent iEvent, IEventPublisher iEventPublisher) {
-        System.out.println(getId() + " Got message!");
+        int id = ((Agent)iEventPublisher).getId();
+        System.out.println(getId() + " Got message! from " + id );
+
     }
 
     @Override
     public void reflect(IEvent iEvent) {
     }
 
-    @Override
-    public ArrayList<BasicAgent> getNeighbours() {
-        return network.getNeighbours(this);
+    public NetworkTopology getNetwork() {
+        return this.network;
     }
 
     public void sendMessage() throws SimControlException{

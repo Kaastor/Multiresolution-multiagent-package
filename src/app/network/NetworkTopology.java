@@ -1,4 +1,4 @@
-package app.communication;
+package app.network;
 
 
 import app.agent.BasicAgent;

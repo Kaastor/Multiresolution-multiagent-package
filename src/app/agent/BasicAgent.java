@@ -1,14 +1,10 @@
 package app.agent;
 
 import app.Context;
-import app.communication.Message;
-import app.communication.Messageable;
-import dissim.broker.IEvent;
-import dissim.broker.IEventPublisher;
 import dissim.broker.IEventSubscriber;
 import dissim.simspace.core.BasicSimEntity;
 
-public abstract class BasicAgent extends BasicSimEntity implements Messageable, IEventSubscriber {
+public abstract class BasicAgent extends BasicSimEntity implements IEventSubscriber {
 
     private static int idCount = 0;
     private final int id;
