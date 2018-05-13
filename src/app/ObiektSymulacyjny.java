@@ -1,6 +1,8 @@
 package app;
 
 import app.agent.BasicAgent;
+import app.communication.Message;
+import app.communication.NetworkTopology;
 import dissim.simspace.core.BasicSimEntity;
 import dissim.simspace.core.SimControlException;
 
@@ -23,8 +25,10 @@ class ObiektSymulacyjny extends BasicSimEntity {
         zdarzenie2= new Zdarzenie(this, 10,2);
         zdarzenie2= new Zdarzenie(this, 10,3);
 //        new Agregat(context, new AggregationImpl());
-        new MyMessage(new BasicAgent(context), 10.0);
+        new Message(new BasicAgent(context), 10.0);
+        NetworkTopology networkTopology = new NetworkTopology();
 
+//        networkTopology.addConnections();
     }
 
     public Subskrybent getSubskrybent2() {
