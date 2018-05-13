@@ -23,13 +23,15 @@ class ObiektSymulacyjny extends BasicSimEntity {
 
     ObiektSymulacyjny(Context context) throws SimControlException {
         super(context);
-        subskrybent= new Subskrybent(context,1);
-        subskrybent2= new Subskrybent(context,2);
-        subskrybent3= new Subskrybent(context,3);
-        zdarzenie= new Zdarzenie(this, 10, 1);
-        zdarzenie2= new Zdarzenie(this, 10,2);
-        zdarzenie2= new Zdarzenie(this, 10,3);
+//        subskrybent= new Subskrybent(context,1);
+//        subskrybent2= new Subskrybent(context,2);
+//        subskrybent3= new Subskrybent(context,3);
+//        zdarzenie= new Zdarzenie(this, 10, 1);
+//        zdarzenie2= new Zdarzenie(this, 10,2);
+//        zdarzenie2= new Zdarzenie(this, 10,3);
 //        new Agregat(context, new AggregationImpl());
+
+
         new Message(new BasicAgent(context), 10.0);
         NetworkTopology networkTopology = new NetworkTopology();
 
