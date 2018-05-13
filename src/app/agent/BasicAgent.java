@@ -17,6 +17,20 @@ public class BasicAgent extends BasicSimEntity {
         return id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BasicAgent agent = (BasicAgent) o;
+
+        return id == agent.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 
     @Override
     public String toString() {

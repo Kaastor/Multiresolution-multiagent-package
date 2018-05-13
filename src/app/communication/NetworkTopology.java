@@ -1,6 +1,7 @@
 package app.communication;
 
 
+import app.Agent;
 import app.agent.BasicAgent;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 
@@ -18,21 +19,30 @@ public class NetworkTopology {
     }
 
     public void addConnection(BasicAgent sourceAgent, BasicAgent targetAgent){
-        addAgent(sourceAgent);
-        addAgent(targetAgent);
         network.addEdge(sourceAgent, targetAgent);
     }
 
     public void addConnections(BasicAgent sourceAgent, ArrayList<BasicAgent> targetAgents){
-        addAgent(sourceAgent);
         targetAgents.forEach(this::addAgent);
         targetAgents.forEach(agent -> addConnection(sourceAgent, agent));
     }
 
+    public void addConnections(int sourceAgentId, int[] targetAgentsIds){
+        BasicAgent sourceAgent = getAgentById(sourceAgentId);
+        for(Integer agentId : targetAgentsIds){
+            addConnection(sourceAgent, getAgentById(agentId));
+        }
+    }
+
     public boolean addAgent(BasicAgent agent) {
-        if(!agents.contains(agent))
-            agents.add(agent);
+        agents.add(agent);
         return network.addVertex(agent);
+    }
+
+    public void addAgents(ArrayList<BasicAgent> agents) {
+        this.agents.addAll(agents);
+        for(BasicAgent agent : agents)
+            network.addVertex(agent);
     }
 
     public boolean removeAgent(BasicAgent agent) {
@@ -77,7 +87,21 @@ public class NetworkTopology {
         return predecessors;
     }
 
+    public BasicAgent getAgentById(int agentId){
+        return agents.get(agentId-1);
+    }
+
     public ArrayList<BasicAgent> getAgents() {
         return agents;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("NetworkTopology{[agents=").append(agents).append(" ], \n");
+        for(BasicAgent agent : agents){
+            builder.append("[NeighboursOf ").append(agent.toString()).append(" : ").append(getNeighbours(agent).toString()).append("\n");
+        }
+        return builder.toString();
     }
 }

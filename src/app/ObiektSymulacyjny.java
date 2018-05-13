@@ -35,17 +35,18 @@ class ObiektSymulacyjny extends BasicSimEntity {
         new Message(new BasicAgent(context), 10.0);
         NetworkTopology networkTopology = new NetworkTopology();
 
-        Agent agent = new Agent(context);
-        networkTopology.addAgent(agent);
         ArrayList<BasicAgent> agents = new ArrayList<>();
-        for(int i = 0 ; i < 5 ; i++){
+        for(int i = 0 ; i < 4 ; i++){
             agents.add(new Agent(context));
         }
-//        networkTopology.addVertex(agents.get(0)); networkTopology.addVertex(agents.get(1));
-//        networkTopology.addEdge(agents.get(0), agents.get(1));
-        networkTopology.addConnections(agent, agents);
-        ArrayList<BasicAgent> agentArrayList = networkTopology.getPredecessors(agent);
-        System.out.println(agentArrayList);
+        networkTopology.addAgents(agents);
+
+        networkTopology.addConnections(1, new int[]{2,4});
+        networkTopology.addConnections(2, new int[]{1,3});
+        networkTopology.addConnections(3, new int[]{2});
+        networkTopology.addConnections(4, new int[]{3});
+
+        System.out.println(networkTopology.toString());
     }
 
     public Subskrybent getSubskrybent2() {
