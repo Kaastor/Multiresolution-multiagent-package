@@ -6,15 +6,17 @@ import app.network.Topology;
 import dissim.broker.IEvent;
 import dissim.broker.IEventPublisher;
 import dissim.simspace.core.SimControlException;
+import javafx.geometry.Point2D;
 
 
 public class Agent extends BasicAgent{
 
     private Topology network;
 
-    public Agent(Context context, Topology network){
+    public Agent(Context context, Topology network, Point2D position){
         super(context);
         this.network = network;
+        setPosition(position);
         context.getContextEventBroker().subscribe(Message.class, this);
     }
 

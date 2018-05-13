@@ -1,13 +1,16 @@
 package app;
 
 import app.network.Topology;
+import dissim.random.SimGenerator;
 import dissim.simspace.core.BasicSimEntity;
 import dissim.simspace.core.SimControlException;
+import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 
 class ObiektSymulacyjny extends BasicSimEntity {
 
+    SimGenerator generator = new SimGenerator();
 
     ObiektSymulacyjny(Context context) throws SimControlException {
         super(context);
@@ -16,7 +19,8 @@ class ObiektSymulacyjny extends BasicSimEntity {
 
         ArrayList<Agent> agents = new ArrayList<>();
         for(int i = 0 ; i < 4 ; i++){
-            agents.add(new Agent(context, topology));
+            Point2D startingPoint = new Point2D(generator.uniform(0, 10), generator.uniform(0, 10));
+            agents.add(new Agent(context, topology, startingPoint));
         }
         topology.addAgents(agents);
 
@@ -25,6 +29,6 @@ class ObiektSymulacyjny extends BasicSimEntity {
         topology.addConnections(2, new int[]{1});
         topology.addConnections(3, new int[]{2});
 
-        agents.get(0).sendMessage();
+        System.out.println(topology.toString());
     }
 }
