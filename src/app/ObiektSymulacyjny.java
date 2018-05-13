@@ -1,6 +1,6 @@
 package app;
 
-import app.formation.Formation;
+import app.formation.FormationGraph;
 import app.formation.PositionVector;
 import app.network.Topology;
 import dissim.random.SimGenerator;
@@ -39,7 +39,9 @@ class ObiektSymulacyjny extends BasicSimEntity {
         positionVectors.add(new PositionVector(0,3, new Point2D(5,-10)));
         positionVectors.add(new PositionVector(3,2, new Point2D(5,10)));
 
-        Formation formation = new Formation(topology, positionVectors);
-        System.out.println(formation.toString());
+        FormationGraph formationGraph = new FormationGraph(topology, positionVectors);
+
+        System.out.println(topology.toString());
+        System.out.println(formationGraph.toString());
     }
 }
