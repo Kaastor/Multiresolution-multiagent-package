@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ZdarzenieFilter implements IEventFilter {
 
-    private List<IEventSubscriber> filterResult = new ArrayList();
+    private List<IEventSubscriber> filterResult = new ArrayList<>();
 
     public ZdarzenieFilter() {
     }

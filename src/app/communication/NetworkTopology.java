@@ -1,7 +1,6 @@
 package app.communication;
 
 
-import app.Agent;
 import app.agent.BasicAgent;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 
@@ -88,7 +87,7 @@ public class NetworkTopology {
     }
 
     public BasicAgent getAgentById(int agentId){
-        return agents.get(agentId-1);
+        return agents.get(agentId);
     }
 
     public ArrayList<BasicAgent> getAgents() {

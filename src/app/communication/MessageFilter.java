@@ -1,7 +1,7 @@
 package app.communication;
 
 
-import app.Zdarzenie;
+import app.agent.BasicAgent;
 import dissim.broker.IEvent;
 import dissim.broker.IEventFilter;
 import dissim.broker.IEventSubscriber;
@@ -11,23 +11,24 @@ import java.util.List;
 
 public class MessageFilter implements IEventFilter {
 
+    public static NetworkTopology networkTopology = null; //TODO  moze byc wiele topologii
     private List<IEventSubscriber> filterResult = new ArrayList<>();
 
-    public MessageFilter() {
+    MessageFilter() {
     }
 
     @Override
     public List<IEventSubscriber> filter(IEvent iEvent) {
-//        if(iEvent.getClass() == Zdarzenie.class && ((Zdarzenie)iEvent).numer %2 != 0) { //nieparz
-//            Zdarzenie zdarzenie = (Zdarzenie)iEvent;
-//            IEventSubscriber subscriber = zdarzenie.getSimEntity().getSubskrybent();
-//            IEventSubscriber subscriber2 = zdarzenie.getSimEntity().getSubskrybent2();
-//            this.filterResult.add(subscriber);
-//            this.filterResult.add(subscriber2);
-//        }
-//        System.out.println("Filtr result - " + filterResult.toString());
-//        return filterResult;
-        return null;
+        if (networkTopology != null && iEvent.getClass() == Message.class) {
+            BasicAgent sender = ((Message) iEvent).getSender();
+            filterResult.addAll(networkTopology.getNeighbours(sender));
+            System.out.println("Message Filter result - " + filterResult.toString());
+
+            return filterResult;
+        } else {
+            System.out.println("Network topology has not been initialized, message not delivered.");
+            return filterResult;
+        }
     }
 
     public Class getThisClass() {
