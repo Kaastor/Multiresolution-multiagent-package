@@ -20,6 +20,10 @@ public class Message extends BasicSimStateChange<BasicAgent, Object> {
         this(sender, 0.0, params);
     }
 
+    public Message(BasicAgent sender) throws SimControlException {
+        this(sender, 0.0, null);
+    }
+
     @Override
     protected void transition() throws SimControlException {
         System.out.println(simTime() + "- Message has been send from agent: " + getSender().getId());

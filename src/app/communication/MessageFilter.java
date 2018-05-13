@@ -11,7 +11,6 @@ import java.util.List;
 
 public class MessageFilter implements IEventFilter {
 
-    public static NetworkTopology networkTopology = null; //TODO  moze byc wiele topologii
     private List<IEventSubscriber> filterResult = new ArrayList<>();
 
     MessageFilter() {
@@ -19,20 +18,14 @@ public class MessageFilter implements IEventFilter {
 
     @Override
     public List<IEventSubscriber> filter(IEvent iEvent) {
-        if (networkTopology != null && iEvent.getClass() == Message.class) {
+        if (iEvent.getClass() == Message.class) {
             BasicAgent sender = ((Message) iEvent).getSender();
-            filterResult.addAll(networkTopology.getNeighbours(sender));
-            System.out.println("Message Filter result - " + filterResult.toString());
-
+            if(sender.getNeighbours() != null)
+                filterResult.addAll(sender.getNeighbours());
+            System.out.println("Message Filter result: " + filterResult.toString());
             return filterResult;
         } else {
-            System.out.println("Network topology has not been initialized, message not delivered.");
             return filterResult;
         }
     }
-
-    public Class getThisClass() {
-        return this.getClass();
-    }
-
 }

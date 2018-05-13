@@ -38,7 +38,7 @@ public class NetworkTopology {
         return network.addVertex(agent);
     }
 
-    public void addAgents(ArrayList<BasicAgent> agents) {
+    public void addAgents(ArrayList<? extends BasicAgent> agents) {
         this.agents.addAll(agents);
         for(BasicAgent agent : agents)
             network.addVertex(agent);
