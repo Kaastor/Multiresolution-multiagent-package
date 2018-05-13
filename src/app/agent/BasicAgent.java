@@ -17,4 +17,11 @@ public class BasicAgent extends BasicSimEntity {
         return id;
     }
 
+
+    @Override
+    public String toString() {
+        return "BasicAgent{" +
+                "id=" + id +
+                '}';
+    }
 }

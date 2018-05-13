@@ -1,10 +1,15 @@
 package app;
 
 import app.agent.BasicAgent;
+import app.communication.Link;
 import app.communication.Message;
 import app.communication.NetworkTopology;
 import dissim.simspace.core.BasicSimEntity;
 import dissim.simspace.core.SimControlException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Set;
 
 class ObiektSymulacyjny extends BasicSimEntity {
 
@@ -28,7 +33,17 @@ class ObiektSymulacyjny extends BasicSimEntity {
         new Message(new BasicAgent(context), 10.0);
         NetworkTopology networkTopology = new NetworkTopology();
 
-//        networkTopology.addConnections();
+        Agent agent = new Agent(context);
+        networkTopology.addVertex(agent);
+        ArrayList<BasicAgent> agents = new ArrayList<>();
+        for(int i = 0 ; i < 5 ; i++){
+            agents.add(new Agent(context));
+        }
+//        networkTopology.addVertex(agents.get(0)); networkTopology.addVertex(agents.get(1));
+//        networkTopology.addEdge(agents.get(0), agents.get(1));
+        networkTopology.addConnections(agent, agents);
+        ArrayList<BasicAgent> agentArrayList = networkTopology.getNeighbours(agent);
+        System.out.println(networkTopology.vertexSet());
     }
 
     public Subskrybent getSubskrybent2() {
