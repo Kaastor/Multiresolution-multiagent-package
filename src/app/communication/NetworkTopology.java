@@ -40,6 +40,23 @@ public class NetworkTopology {
         return network.removeVertex(agent);
     }
 
+    public Link getConnection(BasicAgent sourceAgent, BasicAgent targetAgent){
+        return network.getEdge(sourceAgent, targetAgent);
+    }
+
+    public Link removeConnection(BasicAgent sourceAgent, BasicAgent targetAgent){
+        return network.removeEdge(sourceAgent, targetAgent);
+    }
+
+    public boolean changeConnection(BasicAgent oldSourceAgent, BasicAgent oldTargetAgent, BasicAgent newTargetAgent){
+        if(removeConnection(oldSourceAgent, oldTargetAgent) != null){
+            addConnection(oldSourceAgent, newTargetAgent);
+            return true;
+        }
+        else
+            return false;
+    }
+
     public ArrayList<BasicAgent> getNeighbours(BasicAgent agent){
         ArrayList<BasicAgent> neighbours = new ArrayList<>();
         Set<Link> links = network.outgoingEdgesOf(agent);
@@ -48,6 +65,16 @@ public class NetworkTopology {
         }
 
         return neighbours;
+    }
+
+    public ArrayList<BasicAgent> getPredecessors(BasicAgent agent){
+        ArrayList<BasicAgent> predecessors = new ArrayList<>();
+        Set<Link> links = network.incomingEdgesOf(agent);
+        for(Link link : links){
+            predecessors.add(network.getEdgeTarget(link));
+        }
+
+        return predecessors;
     }
 
     public ArrayList<BasicAgent> getAgents() {

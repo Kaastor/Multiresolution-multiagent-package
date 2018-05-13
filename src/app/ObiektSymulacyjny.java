@@ -42,7 +42,7 @@ class ObiektSymulacyjny extends BasicSimEntity {
 //        networkTopology.addVertex(agents.get(0)); networkTopology.addVertex(agents.get(1));
 //        networkTopology.addEdge(agents.get(0), agents.get(1));
         networkTopology.addConnections(agent, agents);
-        ArrayList<BasicAgent> agentArrayList = networkTopology.getNeighbours(agent);
+        ArrayList<BasicAgent> agentArrayList = networkTopology.getPredecessors(agent);
         System.out.println(agentArrayList);
     }
 
