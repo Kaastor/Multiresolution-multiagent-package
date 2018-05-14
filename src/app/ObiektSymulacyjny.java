@@ -2,7 +2,7 @@ package app;
 
 import app.formation.FormationGraph;
 import app.formation.PositionVector;
-import app.network.Topology;
+import app.network.Network;
 import dissim.random.SimGenerator;
 import dissim.simspace.core.BasicSimEntity;
 import dissim.simspace.core.SimControlException;
@@ -17,19 +17,19 @@ class ObiektSymulacyjny extends BasicSimEntity {
     ObiektSymulacyjny(Context context) throws SimControlException {
         super(context);
 
-        Topology topology = new Topology();
+        Network network = new Network();
 
         ArrayList<Agent> agents = new ArrayList<>();
         for(int i = 0 ; i < 4 ; i++){
             Point2D startingPoint = new Point2D(generator.uniform(0, 10), generator.uniform(0, 10));
-            agents.add(new Agent(context, topology, startingPoint));
+            agents.add(new Agent(context, network, startingPoint));
         }
-        topology.addAgents(agents);
+        network.addAgents(agents);
 
-        topology.addConnections(0, new int[]{1,3});
-        topology.addConnections(1, new int[]{0,2});
-        topology.addConnections(2, new int[]{1});
-        topology.addConnections(3, new int[]{2});
+        network.addConnections(0, new int[]{1,3});
+        network.addConnections(1, new int[]{0,2});
+        network.addConnections(2, new int[]{1});
+        network.addConnections(3, new int[]{2});
 
         ArrayList<PositionVector> positionVectors = new ArrayList<>();
         positionVectors.add(new PositionVector(0,1, new Point2D(5,0)));
@@ -39,9 +39,9 @@ class ObiektSymulacyjny extends BasicSimEntity {
         positionVectors.add(new PositionVector(0,3, new Point2D(5,-10)));
         positionVectors.add(new PositionVector(3,2, new Point2D(5,10)));
 
-        FormationGraph formationGraph = new FormationGraph(topology, positionVectors);
+        FormationGraph formationGraph = new FormationGraph(network, positionVectors);
 
-        System.out.println(topology.toString());
+        System.out.println(network.toString());
         System.out.println(formationGraph.toString());
     }
 }

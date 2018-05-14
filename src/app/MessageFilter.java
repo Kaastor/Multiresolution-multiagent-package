@@ -2,7 +2,7 @@ package app;
 
 
 import app.agent.BasicAgent;
-import app.network.Topology;
+import app.network.Network;
 import dissim.broker.IEvent;
 import dissim.broker.IEventFilter;
 import dissim.broker.IEventSubscriber;
@@ -13,9 +13,9 @@ import java.util.List;
 public class MessageFilter implements IEventFilter {
 
     private List<IEventSubscriber> filterResult = new ArrayList<>();
-    private Topology network;
+    private Network network;
 
-    MessageFilter(Topology network) {
+    MessageFilter(Network network) {
         this.network = network;
     }
 
