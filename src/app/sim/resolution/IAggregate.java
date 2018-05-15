@@ -1,4 +1,4 @@
-package app.resolution;
+package app.sim.resolution;
 
 
 public interface IAggregate {

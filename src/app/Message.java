@@ -1,7 +1,7 @@
 package app;
 
 
-import app.agent.BasicAgent;
+import app.sim.agent.BasicAgent;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 
@@ -10,6 +10,7 @@ public class Message extends BasicSimStateChange<Agent, Object> {
 
     public Message(Agent sender, double delay, Object params) throws SimControlException {
         super(sender, delay, params, new MessageFilter(sender.getNetwork()));
+        setSimPriority(0);
     }
 
     public Message(Agent sender) throws SimControlException {
@@ -18,7 +19,7 @@ public class Message extends BasicSimStateChange<Agent, Object> {
 
     @Override
     protected void transition() throws SimControlException {
-//        System.out.println(simTime() + "- Message has been send from agent: " + getSender().getId());
+        System.out.println(simTime() + "- Message has been send from agent: " + getSender().getId());
     }
 
     BasicAgent getSender() {

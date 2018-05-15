@@ -1,10 +1,9 @@
-package app.formation;
+package app.sim.formation;
 
 
-import app.Agent;
-import app.agent.BasicAgent;
-import app.network.Link;
-import app.network.Network;
+import app.sim.agent.BasicAgent;
+import app.sim.network.Link;
+import app.sim.network.Network;
 
 import java.util.ArrayList;
 

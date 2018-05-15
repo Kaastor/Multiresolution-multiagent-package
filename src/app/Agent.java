@@ -1,9 +1,9 @@
 package app;
 
 
-import app.agent.BasicAgent;
-import app.formation.FormationControl;
-import app.network.Network;
+import app.sim.agent.BasicAgent;
+import app.sim.formation.FormationControl;
+import app.sim.network.Network;
 import dissim.broker.IEvent;
 import dissim.broker.IEventPublisher;
 import dissim.simspace.core.SimControlException;
@@ -47,8 +47,9 @@ public class Agent extends BasicAgent{
         catch (SimControlException e){ e.printStackTrace(); }
     }
 
-    public void nextFormationPosition(){
+    public void nextFormationPosition() throws SimControlException{
         setPosition(formation.nextPosition(this));
+        sendMessages();
     }
 
     Network getNetwork() {

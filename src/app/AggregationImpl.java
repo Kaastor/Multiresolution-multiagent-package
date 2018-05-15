@@ -1,8 +1,8 @@
 package app;
 
 
-import app.resolution.IAggregate;
-import app.resolution.ResolutionLevel;
+import app.sim.resolution.IAggregate;
+import app.sim.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 

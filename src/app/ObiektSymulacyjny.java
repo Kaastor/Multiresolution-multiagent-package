@@ -1,9 +1,9 @@
 package app;
 
-import app.formation.FormationControl;
-import app.formation.FormationGraph;
-import app.formation.PositionVector;
-import app.network.Network;
+import app.sim.formation.FormationControl;
+import app.sim.formation.FormationGraph;
+import app.sim.formation.PositionVector;
+import app.sim.network.Network;
 import dissim.random.SimGenerator;
 import dissim.simspace.core.BasicSimEntity;
 import dissim.simspace.core.SimControlException;

@@ -17,7 +17,7 @@ public class TestEvent extends BasicSimStateChange<Agent, Object> {
     @Override
     protected void transition() throws SimControlException {
         getSimEntity().nextFormationPosition();
-        System.out.println(getSimEntity().toString());
-        new TestEvent(getSimEntity());
+        System.out.println(simTime() + " " + getSimEntity());
+        new TestEvent(getSimEntity(), 1.0);
     }
 }

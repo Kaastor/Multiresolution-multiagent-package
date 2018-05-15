@@ -1,8 +1,10 @@
-package app.formation;
+package app.sim.formation;
 
 
 import app.Agent;
-import app.agent.BasicAgent;
+import app.TestEvent;
+import app.sim.agent.BasicAgent;
+import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 
 import java.util.Set;
@@ -23,6 +25,11 @@ public class FormationControl {
 
     private void initializeFormation(){
         formationGraph.getAgents().forEach(BasicAgent::initialize);
+//        formationGraph.getAgents().forEach(agent -> {
+//            try {
+//                new TestEvent((Agent)agent);
+//            }
+//            catch (SimControlException e) {e.printStackTrace();}});
     }
 
     public Point2D nextPosition(Agent agent){

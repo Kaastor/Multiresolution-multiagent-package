@@ -1,11 +1,11 @@
 package app;
 
 
-import app.resolution.MultiresolutionEntity;
+import app.sim.resolution.MultiresolutionEntity;
 import dissim.simspace.core.SimControlException;
-import app.events.AggregationEvent;
-import app.resolution.IAggregate;
-import app.resolution.ResolutionLevel;
+import app.sim.events.AggregationEvent;
+import app.sim.resolution.IAggregate;
+import app.sim.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 

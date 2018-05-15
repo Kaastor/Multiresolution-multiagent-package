@@ -1,8 +1,8 @@
 package app;
 
 
-import app.agent.BasicAgent;
-import app.network.Network;
+import app.sim.agent.BasicAgent;
+import app.sim.network.Network;
 import dissim.broker.IEvent;
 import dissim.broker.IEventFilter;
 import dissim.broker.IEventSubscriber;
