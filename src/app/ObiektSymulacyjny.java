@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 class ObiektSymulacyjny extends BasicSimEntity {
 
+    public static final double TIME_STEP = 1.0;
     SimGenerator generator = new SimGenerator();
 
     ObiektSymulacyjny(Context context) throws SimControlException {

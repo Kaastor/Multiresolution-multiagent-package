@@ -25,11 +25,6 @@ public class FormationControl {
 
     private void initializeFormation(){
         formationGraph.getAgents().forEach(BasicAgent::initialize);
-//        formationGraph.getAgents().forEach(agent -> {
-//            try {
-//                new TestEvent((Agent)agent);
-//            }
-//            catch (SimControlException e) {e.printStackTrace();}});
     }
 
     public Point2D nextPosition(Agent agent){

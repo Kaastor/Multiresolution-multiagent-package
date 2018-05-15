@@ -13,6 +13,10 @@ public class Message extends BasicSimStateChange<Agent, Object> {
         setSimPriority(0);
     }
 
+    public Message(Agent sender, double delay) throws SimControlException {
+        this(sender, delay, null);
+    }
+
     public Message(Agent sender) throws SimControlException {
         this(sender, 0.0, null);
     }
