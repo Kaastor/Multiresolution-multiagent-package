@@ -21,6 +21,8 @@ public abstract class BasicAgent extends BasicSimEntity implements IEventSubscri
         this.position = position;
     }
 
+    public abstract void initialize();
+
     public int getId() {
         return id;
     }

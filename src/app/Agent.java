@@ -2,6 +2,7 @@ package app;
 
 
 import app.agent.BasicAgent;
+import app.formation.FormationControl;
 import app.network.Network;
 import dissim.broker.IEvent;
 import dissim.broker.IEventPublisher;
@@ -16,8 +17,9 @@ public class Agent extends BasicAgent{
 
     private Network network;
     private Set<Agent> predecessors;
+    private FormationControl formation;
 
-    public Agent(Context context, Network network, Point2D position){
+    Agent(Context context, Network network, Point2D position){
         super(context);
         this.network = network;
         this.predecessors = new HashSet<>();
@@ -30,19 +32,39 @@ public class Agent extends BasicAgent{
     public void reflect(IEvent iEvent, IEventPublisher iEventPublisher) {
         Agent sender = (Agent)iEventPublisher;
         predecessors.add(sender);
-        System.out.println(getId() + " Predecessors: " + this.predecessors.toString());
+//        System.out.println(getId() + "- Predecessors: " + this.predecessors.toString());
     }
 
     @Override
     public void reflect(IEvent iEvent) {
     }
 
-    public Network getNetwork() {
+    @Override
+    public void initialize() {
+        try {
+            sendMessages();
+        }
+        catch (SimControlException e){ e.printStackTrace(); }
+    }
+
+    public void nextFormationPosition(){
+        setPosition(formation.nextPosition(this));
+    }
+
+    Network getNetwork() {
         return this.network;
     }
 
-    public void sendMessages() throws SimControlException{
+    void sendMessages() throws SimControlException{
         new Message(this);
+    }
+
+    public void setFormation(FormationControl formation) {
+        this.formation = formation;
+    }
+
+    public Set<Agent> getPredecessors() {
+        return predecessors;
     }
 
     @Override

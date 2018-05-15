@@ -1,5 +1,6 @@
 package app;
 
+import app.formation.FormationControl;
 import app.formation.FormationGraph;
 import app.formation.PositionVector;
 import app.network.Network;
@@ -50,8 +51,14 @@ class ObiektSymulacyjny extends BasicSimEntity {
         positionVectors.add(new PositionVector(4,3, new Point2D(5,0)));
 
         FormationGraph formationGraph = new FormationGraph(network, positionVectors);
+        FormationControl formationControl = new FormationControl(formationGraph, 0.1, 0.1);
+        agents.forEach(agent -> agent.setFormation(formationControl));
 
-        agents.get(0).sendMessages();
+        agents.forEach(agent -> {
+            try {
+                new TestEvent(agent);
+            }
+        catch (SimControlException e) {e.printStackTrace();}});
 
 //        System.out.println(network.toString());
 //        System.out.println(formationGraph.toString());

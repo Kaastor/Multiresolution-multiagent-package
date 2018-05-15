@@ -1,6 +1,7 @@
 package app.formation;
 
 
+import app.Agent;
 import app.agent.BasicAgent;
 import app.network.Link;
 import app.network.Network;
@@ -33,6 +34,10 @@ public class FormationGraph {
 
     public Link getConnection(int sourceAgentId, int targetAgentId){
         return network.getConnection(sourceAgentId, targetAgentId);
+    }
+
+    public ArrayList<BasicAgent> getAgents(){
+        return network.getAgents();
     }
 
     @Override
