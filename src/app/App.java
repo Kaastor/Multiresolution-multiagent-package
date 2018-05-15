@@ -13,21 +13,19 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    public static final int AGENTS = 5;
+
     public static final double sceneWidth = 1024;
     public static final double sceneHeight = 768;
 
     private Visualization visualization = new Visualization(sceneWidth, sceneHeight);
+    private AnimationTimer timer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        visualization.init();
-
-        BorderPane root = new BorderPane();
-        root.setCenter(visualization);
-
         Task task = new Task<Void>() {
-            @Override public Void call() throws SimControlException{
+            @Override public Void call() throws Exception{
                 startSimulation();
                 return null;
             }
@@ -36,25 +34,27 @@ public class App extends Application {
         thread.setDaemon(true);
         thread.start();
 
-        new AnimationTimer() {
+        visualization.init(AGENTS);
+
+        timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                try {
-                    Thread.sleep(50);
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
+                    visualization.draw();
             }
-        }.start();
+        };
+        timer.start();
 
-        Scene scene = new Scene(root, sceneWidth, sceneHeight, Color.GRAY);
+        BorderPane root = new BorderPane();
+        root.setCenter(visualization);
+        Scene scene = new Scene(root, sceneWidth, sceneHeight, Color.WHITE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void startSimulation() throws SimControlException{
+    private void startSimulation() throws SimControlException, Exception{
         SimModel model = SimModel.getInstance();
+        model.ASTRONOMICALSimulation();
+        model.setSimTimeRatio(5.0);
         System.out.println("Start simulation");
         model.startSimulation();
     }

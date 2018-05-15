@@ -5,26 +5,27 @@ import app.sim.formation.FormationGraph;
 import app.sim.formation.PositionVector;
 import app.sim.network.Network;
 import dissim.random.SimGenerator;
-import dissim.simspace.core.BasicSimEntity;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class ObiektSymulacyjny extends BasicSimEntity {
+class ObiektSymulacyjny{
 
     public static final double TIME_STEP = 1.0;
+    public static final double AGENTS = 6;
+
     SimGenerator generator = new SimGenerator();
 
+    private static ArrayList<Agent> agents = new ArrayList<>();
+
     ObiektSymulacyjny(Context context) throws SimControlException {
-        super(context);
 
         Network network = new Network();
         ArrayList<Point2D> startingPoints = new ArrayList<>(Arrays.asList(
                 new Point2D(6,-1),new Point2D(4,4),new Point2D(0,3),new Point2D(0,0),new Point2D(0,6)
         ));
-        ArrayList<Agent> agents = new ArrayList<>();
         for(int i = 0 ; i < 5 ; i++){
             Point2D startingPoint = startingPoints.get(i);
             agents.add(new Agent(context, network, startingPoint));
@@ -63,5 +64,9 @@ class ObiektSymulacyjny extends BasicSimEntity {
 
 //        System.out.println(network.toString());
 //        System.out.println(formationGraph.toString());
+    }
+
+    public static ArrayList<Agent> getAgents() {
+        return agents;
     }
 }
