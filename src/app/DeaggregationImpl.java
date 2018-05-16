@@ -8,15 +8,17 @@ public class DeaggregationImpl implements IDeaggregation {
 
     @Override
     public Object deaggregate(Object param) {
-        DroneGroupDeaggregate droneGroup = (DroneGroupDeaggregate)param;
+        DroneGroupAggregate droneGroupAggregate = (DroneGroupAggregate)param;
+        DroneGroupDeaggregate droneGroupDeaggregate = (DroneGroupDeaggregate)droneGroupAggregate.getChild();
+        Visualization.setAgents(droneGroupDeaggregate.getAgents());
+        droneGroupDeaggregate.getAgents().forEach(agent -> agent.setPosition(
+                droneGroupAggregate.getGroupAggregate().getPosition()));
 
-        Visualization.setAgents(droneGroup.getAgents());
-        droneGroup.getAgents().forEach(agent -> agent.setPosition(
-                ((DroneGroupAggregate)droneGroup.getParent()).getGroupAggregate().getPosition()));
+        droneGroupDeaggregate.getAgents().forEach(Agent::initialize);
 
-        droneGroup.getAgents().forEach(agent -> {
+        droneGroupDeaggregate.getAgents().forEach(agent -> {
             try {
-                new MoveEvent(agent);
+                new EstablishFormationEvent(agent);
             }
             catch (SimControlException e) {e.printStackTrace();}});
 

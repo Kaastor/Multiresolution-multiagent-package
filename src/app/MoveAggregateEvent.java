@@ -27,7 +27,7 @@ public class MoveAggregateEvent extends BasicSimStateChange<DroneGroupAggregate,
         System.out.println(simTime() + " Aggregate moving to: " + getSimEntity().getGroupAggregate().getPosition());
         if(++count < 10)
             new MoveAggregateEvent(getSimEntity(), TIME_STEP);
-//        else
-//            new DeaggregationEvent(getSimEntity());
+        else
+            new DeaggregationEvent(getSimEntity());
     }
 }

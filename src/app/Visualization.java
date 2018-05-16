@@ -24,6 +24,7 @@ public class Visualization extends Pane {
 
     public void updatePositions(){
         if(agentRepresentations.size() > 0 && !draw) {
+            getChildren().clear();
             getChildren().addAll(agentRepresentations);
             draw = true;
         }

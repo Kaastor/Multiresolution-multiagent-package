@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Agregat extends ResolutionLevel {
 
     public Agregat(Context context, MultiresolutionEntity entity, IAggregation impl) throws SimControlException {
-        super(context, entity,null, null, impl);
+        super(context, entity,impl);
 
         new AggregationEvent(this, 10);
     }

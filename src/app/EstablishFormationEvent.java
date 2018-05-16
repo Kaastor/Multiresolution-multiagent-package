@@ -10,16 +10,16 @@ import static app.ObiektSymulacyjny.TIME_STEP;
 import static app.sim.formation.FormationControl.POSITION_PRECISION;
 
 
-public class MoveEvent extends BasicSimStateChange<Agent, Object> {
+public class EstablishFormationEvent extends BasicSimStateChange<Agent, Object> {
 
     private Point2D lastPosition;
     private Point2D nextPosition;
 
-    public MoveEvent(Agent agent, double delay) throws SimControlException{
+    public EstablishFormationEvent(Agent agent, double delay) throws SimControlException{
         super(agent, delay);
     }
 
-    public MoveEvent(Agent agent) throws SimControlException{
+    public EstablishFormationEvent(Agent agent) throws SimControlException{
         super(agent);
     }
 
@@ -29,7 +29,7 @@ public class MoveEvent extends BasicSimStateChange<Agent, Object> {
         nextPosition = getSimEntity().nextFormationPosition();
         System.out.println(simTime() + ":" + getSimEntity().getId() + " - " + getSimEntity().getPosition());
         if(!checkPositionPrecision())
-            new MoveEvent(getSimEntity(), TIME_STEP);
+            new EstablishFormationEvent(getSimEntity(), TIME_STEP);
     }
 
     private boolean checkPositionPrecision(){

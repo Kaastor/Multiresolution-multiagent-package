@@ -18,12 +18,11 @@ class ObiektSymulacyjny{
         IDeaggregation dronesDeagregation = new DeaggregationImpl();
 
 //        droneFormation = new DronesEntity(context, 2);
-        droneGroupAggregate = new DroneGroupAggregate(context, droneFormation, droneGroupDeaggregate);
-        droneGroupDeaggregate = new DroneGroupDeaggregate(context, droneFormation, droneGroupAggregate);
-
+        droneGroupAggregate = new DroneGroupAggregate(context, droneFormation, dronesDeagregation);
+        droneGroupDeaggregate = new DroneGroupDeaggregate(context, droneFormation);
+        droneGroupAggregate.setChild(droneGroupDeaggregate);
+        droneGroupDeaggregate.setParent(droneGroupAggregate);
         new MoveAggregateEvent(droneGroupAggregate);
-
-//        new DeaggregationEvent(droneGroupAggregate);
 
 
     }

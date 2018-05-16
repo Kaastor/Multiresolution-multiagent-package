@@ -12,7 +12,7 @@ public class DeaggregationEvent extends BasicSimStateChange<ResolutionLevel, Obj
 
     public DeaggregationEvent(ResolutionLevel parent, double delay) throws SimControlException{
         super(parent, delay);
-        this.deaggregate = parent.getChild().getDeaggregation();
+        this.deaggregate = parent.getDeaggregation();
         this.resolutionLevel = getSimEntity();
     }
 
@@ -22,7 +22,7 @@ public class DeaggregationEvent extends BasicSimStateChange<ResolutionLevel, Obj
 
     @Override
     protected void transition() throws SimControlException {
-        resolutionLevel.getEntity().setActiveResolution(resolutionLevel.getChild());
+//        resolutionLevel.getEntity().setActiveResolution(resolutionLevel.getChild());
         deaggregate.deaggregate(resolutionLevel);
     }
 

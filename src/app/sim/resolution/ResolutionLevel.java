@@ -13,29 +13,31 @@ public abstract class ResolutionLevel extends BasicSimEntity {
     private ResolutionLevel child;
     private boolean hibernated = true;
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IDeaggregation deaggregation, IAggregation aggregation) {
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, IDeaggregation deaggregation, IAggregation aggregation) {
         super(context);
         this.entity = entity;
-        this.parent = parent;
-        this.child = child;
         this.deaggregation = deaggregation;
         this.aggregation = aggregation;
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IDeaggregation deaggregation) {
-        this(context, entity, parent, child, deaggregation, null);
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, IDeaggregation deaggregation) {
+        this(context, entity, deaggregation, null);
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IAggregation aggregation) {
-        this(context, entity, parent, child, null, aggregation);
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, IAggregation aggregation) {
+        this(context, entity, null, aggregation);
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, IAggregation aggregation){
-        this(context, entity, parent, null, null, aggregation);
+    public ResolutionLevel(Context context, MultiresolutionEntity entity){
+        this(context, entity, null, null);
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel child){
-        this(context, entity, null, child, null, null);
+    public void setParent(ResolutionLevel parent) {
+        this.parent = parent;
+    }
+
+    public void setChild(ResolutionLevel child) {
+        this.child = child;
     }
 
     public abstract void stateChange(Object result);
