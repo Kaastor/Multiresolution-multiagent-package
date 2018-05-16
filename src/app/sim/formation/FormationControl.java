@@ -2,15 +2,15 @@ package app.sim.formation;
 
 
 import app.Agent;
-import app.TestEvent;
 import app.sim.agent.BasicAgent;
-import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 
 import java.util.Set;
 
 
 public class FormationControl {
+
+    public static final double POSITION_PRECISION = 0.01;
 
     private FormationGraph formationGraph;
     private double T;

@@ -56,7 +56,7 @@ class ObiektSymulacyjny{
 
         agents.forEach(agent -> {
             try {
-                new TestEvent(agent);
+                new MoveEvent(agent);
             }
         catch (SimControlException e) {e.printStackTrace();}});
 

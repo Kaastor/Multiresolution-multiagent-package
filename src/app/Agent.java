@@ -57,9 +57,11 @@ public class Agent extends BasicAgent{
         catch (SimControlException e){ e.printStackTrace(); }
     }
 
-    public void nextFormationPosition() throws SimControlException{
-        setPosition(formation.nextPosition(this));
+    public Point2D nextFormationPosition() throws SimControlException{
+        Point2D nextPosition = formation.nextPosition(this);
+        setPosition(nextPosition);
         sendMessages();
+        return nextPosition;
     }
 
     Network getNetwork() {
