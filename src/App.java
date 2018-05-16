@@ -1,5 +1,4 @@
-package app;
-
+import app.Visualization;
 import dissim.simspace.core.SimControlException;
 import dissim.simspace.core.SimModel;
 import javafx.animation.AnimationTimer;
@@ -16,8 +15,6 @@ public class App extends Application {
     private static final double SCENE_WIDTH = 1200;
     private static final double SCENE_HEIGHT = 900;
 
-    public static AnimationTimer animationTimer;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -33,16 +30,16 @@ public class App extends Application {
         thread.setDaemon(true);
         thread.start();
 
-        animationTimer = new AnimationTimer() {
+        new AnimationTimer() {
             @Override
             public void handle(long now) {
                     visualization.updatePositions();
             }
-        };
+        }.start();
 
         BorderPane root = new BorderPane();
         root.setCenter(visualization);
-        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
+        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, Color.AZURE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

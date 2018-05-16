@@ -9,28 +9,28 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 
 
-class Visualization extends Pane {
+public class Visualization extends Pane {
 
     private static ArrayList<Agent> agents = new ArrayList<>();
-    private static ArrayList<Circle> agentRepresentations = null;
+    private static ArrayList<Circle> agentRepresentations = new ArrayList<>();
 
     private static SimGenerator generator = new SimGenerator();
     private boolean draw = false;
 
-    Visualization(double sceneWidth, double sceneHeight) {
+    public Visualization(double sceneWidth, double sceneHeight) {
         setWidth(sceneWidth);
         setHeight(sceneHeight);
     }
 
-    void updatePositions(){
-        if(agentRepresentations != null && !draw) {
+    public void updatePositions(){
+        if(agentRepresentations.size() > 0 && !draw) {
             getChildren().addAll(agentRepresentations);
             draw = true;
         }
-        else {
+        else if(draw){
             for (int i = 0; i < agents.size(); i++) {
-                agentRepresentations.get(i).setCenterX(agents.get(i).getPosition().getX() * 15 + 100);
-                agentRepresentations.get(i).setCenterY(agents.get(i).getPosition().getY() * 15 + 100);
+                agentRepresentations.get(i).setCenterX(agents.get(i).getPosition().getX() * 15 + 300);
+                agentRepresentations.get(i).setCenterY(agents.get(i).getPosition().getY() * 15 + 300);
             }
         }
     }
@@ -41,11 +41,8 @@ class Visualization extends Pane {
     }
 
     static void setAgents(ArrayList<Agent> agentsList) {
-        agentRepresentations = new ArrayList<>();
         agents = agentsList;
         agentsList.forEach(agent -> agentRepresentations.add(agent.getGraphicRepresentation()));
-        App.animationTimer.start();
-
     }
 
 }
