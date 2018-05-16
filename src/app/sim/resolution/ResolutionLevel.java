@@ -30,6 +30,13 @@ public abstract class ResolutionLevel extends BasicSimEntity {
         this(context, entity, parent, child, null, aggregation);
     }
 
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, IAggregate aggregation){
+        this(context, entity, parent, null, null, aggregation);
+    }
+
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel child){
+        this(context, entity, null, child, null, null);
+    }
 
     public abstract void stateChange(Object result);
 

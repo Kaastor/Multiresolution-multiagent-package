@@ -5,6 +5,8 @@ import app.sim.formation.FormationControl;
 import app.sim.formation.FormationGraph;
 import app.sim.formation.PositionVector;
 import app.sim.network.Network;
+import app.sim.resolution.MultiresolutionEntity;
+import app.sim.resolution.ResolutionLevel;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 
@@ -37,6 +39,9 @@ class ObiektSymulacyjny{
         FormationControl formationControl = new FormationControl(formationGraph, 0.1, 0.1);
         agents.forEach(agent -> agent.setFormation(formationControl));
         agents.forEach(BasicAgent::initialize);
+
+
+//        MultiresolutionEntity droneFormation = new MultiresolutionEntity(context, );
 
 
         agents.forEach(agent -> {

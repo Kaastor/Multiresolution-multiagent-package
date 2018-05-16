@@ -26,4 +26,8 @@ public class MultiresolutionEntity {
         return resolutionNumber;
     }
 
+    public void addResolution(ResolutionLevel resolutionLevel){
+        resolutions.add(resolutionLevel);
+    }
+
 }
