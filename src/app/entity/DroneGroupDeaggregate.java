@@ -1,11 +1,11 @@
-package app;
+package app.entity;
 
 
+import app.Context;
 import app.sim.formation.FormationControl;
 import app.sim.formation.FormationGraph;
 import app.sim.formation.PositionVector;
 import app.sim.network.Network;
-import app.sim.resolution.MultiresolutionEntity;
 import app.sim.resolution.ResolutionLevel;
 import javafx.geometry.Point2D;
 
@@ -16,8 +16,8 @@ public class DroneGroupDeaggregate extends ResolutionLevel{
     private ArrayList<Agent> agents = new ArrayList<>();
     private Network network = new Network();
 
-    DroneGroupDeaggregate(Context context, MultiresolutionEntity entity) {
-        super(context, entity);
+    public DroneGroupDeaggregate(Context context) {
+        super(context);
         initialization(context);
     }
 
@@ -36,7 +36,7 @@ public class DroneGroupDeaggregate extends ResolutionLevel{
         agents.forEach(agent -> agent.setFormation(formationControl));
     }
 
-    ArrayList<Agent> getAgents() {
+    public ArrayList<Agent> getAgents() {
         return agents;
     }
 

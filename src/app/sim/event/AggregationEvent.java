@@ -1,4 +1,4 @@
-package app.sim.events;
+package app.sim.event;
 
 import app.sim.resolution.IAggregation;
 import app.sim.resolution.ResolutionLevel;
@@ -22,9 +22,7 @@ public class AggregationEvent extends BasicSimStateChange<ResolutionLevel, Objec
 
     @Override
     protected void transition() throws SimControlException {
-        resolutionLevel.getEntity().setActiveResolution(resolutionLevel.getParent());
-        Object result = aggregate.aggregate(resolutionLevel);
-        resolutionLevel.getParent().stateChange(result);
+        aggregate.aggregate(resolutionLevel);
     }
 
 }

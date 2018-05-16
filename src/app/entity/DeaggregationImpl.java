@@ -1,6 +1,8 @@
-package app;
+package app.entity;
 
 
+import app.visualisation.Visualization;
+import app.event.EstablishFormationEvent;
 import app.sim.resolution.IDeaggregation;
 import dissim.simspace.core.SimControlException;
 

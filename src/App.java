@@ -1,4 +1,4 @@
-import app.Visualization;
+import app.visualisation.Visualization;
 import dissim.simspace.core.SimControlException;
 import dissim.simspace.core.SimModel;
 import javafx.animation.AnimationTimer;

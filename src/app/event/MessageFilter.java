@@ -1,6 +1,7 @@
-package app;
+package app.event;
 
 
+import app.event.Message;
 import app.sim.agent.BasicAgent;
 import app.sim.network.Network;
 import dissim.broker.IEvent;

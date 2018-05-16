@@ -1,14 +1,18 @@
 package app;
 
+import app.event.MoveAggregateEvent;
 import app.sim.resolution.IAggregation;
 import app.sim.resolution.IDeaggregation;
+import app.entity.AggregationImpl;
+import app.entity.DeaggregationImpl;
+import app.entity.DroneGroupAggregate;
+import app.entity.DroneGroupDeaggregate;
 import dissim.simspace.core.SimControlException;
 
-class ObiektSymulacyjny{
+public class ObiektSymulacyjny{
 
-    static final double TIME_STEP = 1.0;
+    public static final double TIME_STEP = 1.0;
 
-    public static DronesEntity droneFormation;
     private DroneGroupAggregate droneGroupAggregate;
     private DroneGroupDeaggregate droneGroupDeaggregate;
 
@@ -17,11 +21,11 @@ class ObiektSymulacyjny{
         IAggregation dronesAggregation = new AggregationImpl();
         IDeaggregation dronesDeagregation = new DeaggregationImpl();
 
-//        droneFormation = new DronesEntity(context, 2);
-        droneGroupAggregate = new DroneGroupAggregate(context, droneFormation, dronesDeagregation);
-        droneGroupDeaggregate = new DroneGroupDeaggregate(context, droneFormation);
+        droneGroupAggregate = new DroneGroupAggregate(context, dronesDeagregation);
+        droneGroupDeaggregate = new DroneGroupDeaggregate(context);
         droneGroupAggregate.setChild(droneGroupDeaggregate);
         droneGroupDeaggregate.setParent(droneGroupAggregate);
+
         new MoveAggregateEvent(droneGroupAggregate);
 
 

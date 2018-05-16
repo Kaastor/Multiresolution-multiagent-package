@@ -1,6 +1,8 @@
-package app;
+package app.entity;
 
 
+import app.Context;
+import app.event.Message;
 import app.sim.agent.BasicAgent;
 import app.sim.formation.FormationControl;
 import app.sim.network.Network;
@@ -9,6 +11,7 @@ import dissim.broker.IEventPublisher;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
+import app.visualisation.Visualization;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +24,7 @@ public class Agent extends BasicAgent{
     private Set<Agent> predecessors;
     private FormationControl formation;
 
-    Agent(Context context, Network network, Point2D position){
+    public Agent(Context context, Network network, Point2D position){
         super(context);
         this.network = network;
         this.predecessors = new HashSet<>();
@@ -30,7 +33,7 @@ public class Agent extends BasicAgent{
         initGraphicRepresentation();
     }
 
-    Agent(Context context, Point2D position){
+    public Agent(Context context, Point2D position){
         super(context);
         setPosition(position);
         initGraphicRepresentation();
@@ -70,7 +73,7 @@ public class Agent extends BasicAgent{
         return nextPosition;
     }
 
-    Network getNetwork() {
+    public Network getNetwork() {
         return this.network;
     }
 

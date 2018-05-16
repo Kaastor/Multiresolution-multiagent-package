@@ -1,4 +1,4 @@
-package app.sim.events;
+package app.sim.event;
 
 import app.sim.resolution.IDeaggregation;
 import app.sim.resolution.ResolutionLevel;
@@ -22,7 +22,6 @@ public class DeaggregationEvent extends BasicSimStateChange<ResolutionLevel, Obj
 
     @Override
     protected void transition() throws SimControlException {
-//        resolutionLevel.getEntity().setActiveResolution(resolutionLevel.getChild());
         deaggregate.deaggregate(resolutionLevel);
     }
 

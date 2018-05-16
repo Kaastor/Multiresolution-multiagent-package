@@ -1,6 +1,7 @@
-package app;
+package app.event;
 
 
+import app.entity.Agent;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;

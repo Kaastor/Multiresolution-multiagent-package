@@ -6,30 +6,28 @@ import dissim.simspace.core.BasicSimEntity;
 
 public abstract class ResolutionLevel extends BasicSimEntity {
 
-    private MultiresolutionEntity entity;
     private IAggregation aggregation;
     private IDeaggregation deaggregation;
     private ResolutionLevel parent;
     private ResolutionLevel child;
     private boolean hibernated = true;
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, IDeaggregation deaggregation, IAggregation aggregation) {
+    public ResolutionLevel(Context context, IDeaggregation deaggregation, IAggregation aggregation) {
         super(context);
-        this.entity = entity;
         this.deaggregation = deaggregation;
         this.aggregation = aggregation;
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, IDeaggregation deaggregation) {
-        this(context, entity, deaggregation, null);
+    public ResolutionLevel(Context context, IDeaggregation deaggregation) {
+        this(context, deaggregation, null);
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, IAggregation aggregation) {
-        this(context, entity, null, aggregation);
+    public ResolutionLevel(Context context,  IAggregation aggregation) {
+        this(context, null, aggregation);
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity){
-        this(context, entity, null, null);
+    public ResolutionLevel(Context context){
+        this(context, null, null);
     }
 
     public void setParent(ResolutionLevel parent) {
@@ -72,9 +70,5 @@ public abstract class ResolutionLevel extends BasicSimEntity {
 
     public void setHibernated(boolean hibernated) {
         this.hibernated = hibernated;
-    }
-
-    public MultiresolutionEntity getEntity() {
-        return entity;
     }
 }

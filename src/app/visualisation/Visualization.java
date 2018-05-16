@@ -1,6 +1,7 @@
-package app;
+package app.visualisation;
 
 
+import app.entity.Agent;
 import dissim.random.SimGenerator;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -36,12 +37,12 @@ public class Visualization extends Pane {
         }
     }
 
-    static Color randomColor() {
+    public static Color randomColor() {
         int range = 220;
         return Color.rgb((int) (generator.nextDouble() * range), (int) (generator.nextDouble() * range), (int) (generator.nextDouble() * range));
     }
 
-    static void setAgents(ArrayList<Agent> agentsList) {
+    public static void setAgents(ArrayList<Agent> agentsList) {
         draw = false;
         agents = agentsList;
         agentRepresentations.clear();

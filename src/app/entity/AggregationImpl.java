@@ -1,4 +1,4 @@
-package app;
+package app.entity;
 
 
 import app.sim.resolution.IAggregation;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AggregationImpl implements IAggregation {
 
-    AggregationImpl(){
+    public AggregationImpl(){
     }
 
     @Override

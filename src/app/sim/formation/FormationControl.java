@@ -1,8 +1,7 @@
 package app.sim.formation;
 
 
-import app.Agent;
-import app.sim.agent.BasicAgent;
+import app.entity.Agent;
 import javafx.geometry.Point2D;
 
 import java.util.Set;

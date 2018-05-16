@@ -5,6 +5,7 @@ import app.Context;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class MultiresolutionEntity {
 
     private Context context;
