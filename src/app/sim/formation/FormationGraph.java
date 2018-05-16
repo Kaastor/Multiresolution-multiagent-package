@@ -35,10 +35,6 @@ public class FormationGraph {
         return network.getConnection(sourceAgentId, targetAgentId);
     }
 
-    public ArrayList<BasicAgent> getAgents(){
-        return network.getAgents();
-    }
-
     @Override
     public String toString() {
         return "FormationGraph{" +

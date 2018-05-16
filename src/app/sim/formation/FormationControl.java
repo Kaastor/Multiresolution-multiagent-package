@@ -20,11 +20,7 @@ public class FormationControl {
         this.formationGraph = formationGraph;
         this.T = T;
         this.K = K;
-        initializeFormation();
-    }
 
-    private void initializeFormation(){
-        formationGraph.getAgents().forEach(BasicAgent::initialize);
     }
 
     public Point2D nextPosition(Agent agent){
