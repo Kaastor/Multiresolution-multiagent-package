@@ -1,9 +1,7 @@
 package app;
 
-import app.sim.events.DeaggregationEvent;
 import app.sim.resolution.IAggregation;
 import app.sim.resolution.IDeaggregation;
-import app.sim.resolution.MultiresolutionEntity;
 import dissim.simspace.core.SimControlException;
 
 class ObiektSymulacyjny{
@@ -19,11 +17,13 @@ class ObiektSymulacyjny{
         IAggregation dronesAggregation = new AggregationImpl();
         IDeaggregation dronesDeagregation = new DeaggregationImpl();
 
-        droneFormation = new DronesEntity(context, 2);
+//        droneFormation = new DronesEntity(context, 2);
         droneGroupAggregate = new DroneGroupAggregate(context, droneFormation, droneGroupDeaggregate);
         droneGroupDeaggregate = new DroneGroupDeaggregate(context, droneFormation, droneGroupAggregate);
 
-        new DeaggregationEvent(droneGroupAggregate);
+        new MoveAggregateEvent(droneGroupAggregate);
+
+//        new DeaggregationEvent(droneGroupAggregate);
 
 
     }

@@ -1,7 +1,6 @@
 package app;
 
 
-import app.sim.formation.FormationControl;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;

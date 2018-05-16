@@ -5,6 +5,9 @@ import app.sim.resolution.MultiresolutionEntity;
 import app.sim.resolution.ResolutionLevel;
 import javafx.geometry.Point2D;
 
+import java.util.ArrayList;
+
+
 public class DroneGroupAggregate extends ResolutionLevel{
 
     private Agent groupAggregate;
@@ -12,6 +15,13 @@ public class DroneGroupAggregate extends ResolutionLevel{
     public DroneGroupAggregate(Context context, MultiresolutionEntity entity, ResolutionLevel child) {
         super(context, entity, child);
         groupAggregate = new Agent(context, new Point2D(4.0,4.0));
+        initialization();
+    }
+
+    private void initialization(){
+        ArrayList<Agent> agent = new ArrayList<>();
+        agent.add(groupAggregate);
+        Visualization.setAgents(agent);
     }
 
     @Override
