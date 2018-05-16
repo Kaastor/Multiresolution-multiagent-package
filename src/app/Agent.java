@@ -8,6 +8,7 @@ import dissim.broker.IEvent;
 import dissim.broker.IEventPublisher;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Circle;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 public class Agent extends BasicAgent{
 
+    private Circle graphicRepresentation;
     private Network network;
     private Set<Agent> predecessors;
     private FormationControl formation;
@@ -25,14 +27,22 @@ public class Agent extends BasicAgent{
         this.predecessors = new HashSet<>();
         setPosition(position);
         context.getContextEventBroker().subscribe(Message.class, this);
+        initGraphicRepresentation();
     }
 
-    //TODO zrobic przesylanie wiadomosci i update poprzednikow na aktualnych
+    private void initGraphicRepresentation(){
+        graphicRepresentation = new Circle();
+        graphicRepresentation.setStroke(Visualization.randomColor());
+        graphicRepresentation.setFill(Visualization.randomColor());
+        graphicRepresentation.setRadius(8d);
+        graphicRepresentation.setCenterX(getPosition().getX());
+        graphicRepresentation.setCenterY(getPosition().getY());
+    }
+
     @Override
     public void reflect(IEvent iEvent, IEventPublisher iEventPublisher) {
         Agent sender = (Agent)iEventPublisher;
         predecessors.add(sender);
-//        System.out.println(getId() + "- Predecessors: " + this.predecessors.toString());
     }
 
     @Override
@@ -66,6 +76,10 @@ public class Agent extends BasicAgent{
 
     public Set<Agent> getPredecessors() {
         return predecessors;
+    }
+
+    public Circle getGraphicRepresentation() {
+        return graphicRepresentation;
     }
 
     @Override

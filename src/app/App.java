@@ -8,21 +8,20 @@ import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
-    public static final int AGENTS = 5;
+    private static final double SIM_TIME_RATIO = 5.0;
+    private static final double SCENE_WIDTH = 1200;
+    private static final double SCENE_HEIGHT = 900;
 
-    public static final double sceneWidth = 1024;
-    public static final double sceneHeight = 768;
-
-    private Visualization visualization = new Visualization(sceneWidth, sceneHeight);
-    private AnimationTimer timer;
+    public static AnimationTimer animationTimer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Visualization visualization = new Visualization(SCENE_WIDTH, SCENE_HEIGHT);
 
         Task task = new Task<Void>() {
             @Override public Void call() throws Exception{
@@ -34,28 +33,24 @@ public class App extends Application {
         thread.setDaemon(true);
         thread.start();
 
-        visualization.init(AGENTS);
-
-        timer = new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                    visualization.draw();
+                    visualization.updatePositions();
             }
         };
-        timer.start();
 
         BorderPane root = new BorderPane();
         root.setCenter(visualization);
-        Scene scene = new Scene(root, sceneWidth, sceneHeight, Color.WHITE);
+        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void startSimulation() throws SimControlException, Exception{
+    private void startSimulation() throws SimControlException{
         SimModel model = SimModel.getInstance();
         model.ASTRONOMICALSimulation();
-        model.setSimTimeRatio(5.0);
-        System.out.println("Start simulation");
+        model.setSimTimeRatio(SIM_TIME_RATIO);
         model.startSimulation();
     }
 

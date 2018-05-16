@@ -1,46 +1,51 @@
 package app;
 
 
+import dissim.random.SimGenerator;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 class Visualization extends Pane {
 
-    private ArrayList<Agent> agents = ObiektSymulacyjny.getAgents();
-    private ArrayList<Circle> agentCircles = new ArrayList<>();
+    private static ArrayList<Agent> agents = new ArrayList<>();
+    private static ArrayList<Circle> agentRepresentations = null;
 
-    private Random random = new Random();
+    private static SimGenerator generator = new SimGenerator();
+    private boolean draw = false;
 
     Visualization(double sceneWidth, double sceneHeight) {
         setWidth(sceneWidth);
         setHeight(sceneHeight);
     }
 
-    void init(int agentNumber) throws Exception {
-        for(int i = 0 ; i < agentNumber ; i++){
-            Circle circle = new Circle();
-            circle.setStroke(randomColor());
-            circle.setFill(randomColor());
-            circle.setRadius(8d);
-            agentCircles.add(circle);
-            this.getChildren().add(circle);
+    void updatePositions(){
+        if(agentRepresentations != null && !draw) {
+            getChildren().addAll(agentRepresentations);
+            draw = true;
+        }
+        else {
+            for (int i = 0; i < agents.size(); i++) {
+                agentRepresentations.get(i).setCenterX(agents.get(i).getPosition().getX() * 15 + 100);
+                agentRepresentations.get(i).setCenterY(agents.get(i).getPosition().getY() * 15 + 100);
+            }
         }
     }
 
-    void draw(){
-        for(int i = 0 ; i < agents.size() ; i++){
-            agentCircles.get(i).setCenterX(agents.get(i).getPosition().getX()*15+300);
-            agentCircles.get(i).setCenterY(agents.get(i).getPosition().getY()*15+300);
-        }
-    }
-
-    public Color randomColor() {
+    static Color randomColor() {
         int range = 220;
-        return Color.rgb((int) (random.nextDouble() * range), (int) (random.nextDouble() * range), (int) (random.nextDouble() * range));
+        return Color.rgb((int) (generator.nextDouble() * range), (int) (generator.nextDouble() * range), (int) (generator.nextDouble() * range));
     }
+
+    static void setAgents(ArrayList<Agent> agentsList) {
+        agentRepresentations = new ArrayList<>();
+        agents = agentsList;
+        agentsList.forEach(agent -> agentRepresentations.add(agent.getGraphicRepresentation()));
+        App.animationTimer.start();
+
+    }
+
 }
