@@ -22,12 +22,13 @@ public class MultiresolutionEntity {
         this.activeResolution = resolution;
     }
 
+    public ResolutionLevel getActiveResolution() {
+        return activeResolution;
+    }
+
     public int getResolutionNumber() {
         return resolutionNumber;
     }
 
-    public void addResolution(ResolutionLevel resolutionLevel){
-        resolutions.add(resolutionLevel);
-    }
 
 }

@@ -15,7 +15,7 @@ public class Visualization extends Pane {
     private static ArrayList<Circle> agentRepresentations = new ArrayList<>();
 
     private static SimGenerator generator = new SimGenerator();
-    private boolean draw = false;
+    private static boolean draw = false;
 
     public Visualization(double sceneWidth, double sceneHeight) {
         setWidth(sceneWidth);
@@ -41,7 +41,9 @@ public class Visualization extends Pane {
     }
 
     static void setAgents(ArrayList<Agent> agentsList) {
+        draw = false;
         agents = agentsList;
+        agentRepresentations.clear();
         agentsList.forEach(agent -> agentRepresentations.add(agent.getGraphicRepresentation()));
     }
 

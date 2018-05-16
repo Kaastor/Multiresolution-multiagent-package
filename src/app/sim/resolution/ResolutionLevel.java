@@ -7,13 +7,13 @@ import dissim.simspace.core.BasicSimEntity;
 public abstract class ResolutionLevel extends BasicSimEntity {
 
     private MultiresolutionEntity entity;
-    private IAggregate aggregation;
-    private IDeaggregate deaggregation;
+    private IAggregation aggregation;
+    private IDeaggregation deaggregation;
     private ResolutionLevel parent;
     private ResolutionLevel child;
     private boolean hibernated = true;
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IDeaggregate deaggregation, IAggregate aggregation) {
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IDeaggregation deaggregation, IAggregation aggregation) {
         super(context);
         this.entity = entity;
         this.parent = parent;
@@ -22,15 +22,15 @@ public abstract class ResolutionLevel extends BasicSimEntity {
         this.aggregation = aggregation;
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IDeaggregate deaggregation) {
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IDeaggregation deaggregation) {
         this(context, entity, parent, child, deaggregation, null);
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IAggregate aggregation) {
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, ResolutionLevel child, IAggregation aggregation) {
         this(context, entity, parent, child, null, aggregation);
     }
 
-    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, IAggregate aggregation){
+    public ResolutionLevel(Context context, MultiresolutionEntity entity, ResolutionLevel parent, IAggregation aggregation){
         this(context, entity, parent, null, null, aggregation);
     }
 
@@ -40,19 +40,19 @@ public abstract class ResolutionLevel extends BasicSimEntity {
 
     public abstract void stateChange(Object result);
 
-    public void setAggregation(IAggregate aggregation) {
+    public void setAggregation(IAggregation aggregation) {
         this.aggregation = aggregation;
     }
 
-    public IDeaggregate getDeaggregation() {
+    public IDeaggregation getDeaggregation() {
         return deaggregation;
     }
 
-    public void setDeaggregation(IDeaggregate deaggregation) {
+    public void setDeaggregation(IDeaggregation deaggregation) {
         this.deaggregation = deaggregation;
     }
 
-    public IAggregate getAggregation() {
+    public IAggregation getAggregation() {
         return aggregation;
     }
 

@@ -30,6 +30,12 @@ public class Agent extends BasicAgent{
         initGraphicRepresentation();
     }
 
+    Agent(Context context, Point2D position){
+        super(context);
+        setPosition(position);
+        initGraphicRepresentation();
+    }
+
     private void initGraphicRepresentation(){
         graphicRepresentation = new Circle();
         graphicRepresentation.setStroke(Visualization.randomColor());

@@ -1,19 +1,19 @@
 package app;
 
 
-import app.sim.resolution.IAggregate;
+import app.sim.resolution.IAggregation;
 import app.sim.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 
-public class AggregationImpl implements IAggregate {
+public class AggregationImpl implements IAggregation {
 
     AggregationImpl(){
     }
 
     @Override
-    public Object aggregate(Object params) {
-        ResolutionLevel parent = (ResolutionLevel)params;
+    public Object aggregate(Object param) {
+        ResolutionLevel parent = (ResolutionLevel) param;
 
         System.out.println("Aggregation " + parent.isHibernated());
         ArrayList<Integer> list = new ArrayList<>();

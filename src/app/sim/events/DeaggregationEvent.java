@@ -1,13 +1,13 @@
 package app.sim.events;
 
-import app.sim.resolution.IDeaggregate;
+import app.sim.resolution.IDeaggregation;
 import app.sim.resolution.ResolutionLevel;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 
 public class DeaggregationEvent extends BasicSimStateChange<ResolutionLevel, Object> {
 
-    private IDeaggregate deaggregate;
+    private IDeaggregation deaggregate;
     private ResolutionLevel resolutionLevel;
 
     public DeaggregationEvent(ResolutionLevel parent, double delay) throws SimControlException{

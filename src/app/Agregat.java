@@ -4,14 +4,14 @@ package app;
 import app.sim.resolution.MultiresolutionEntity;
 import dissim.simspace.core.SimControlException;
 import app.sim.events.AggregationEvent;
-import app.sim.resolution.IAggregate;
+import app.sim.resolution.IAggregation;
 import app.sim.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 
 public class Agregat extends ResolutionLevel {
 
-    public Agregat(Context context, MultiresolutionEntity entity, IAggregate impl) throws SimControlException {
+    public Agregat(Context context, MultiresolutionEntity entity, IAggregation impl) throws SimControlException {
         super(context, entity,null, null, impl);
 
         new AggregationEvent(this, 10);
