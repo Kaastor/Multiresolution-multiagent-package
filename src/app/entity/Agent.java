@@ -77,7 +77,7 @@ public class Agent extends BasicAgent{
         return this.network;
     }
 
-    void sendMessages() throws SimControlException{
+    public void sendMessages() throws SimControlException{
         new Message(this);
     }
 

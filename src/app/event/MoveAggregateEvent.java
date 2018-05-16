@@ -6,7 +6,7 @@ import app.sim.event.DeaggregationEvent;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 
-import static app.ObiektSymulacyjny.TIME_STEP;
+import static app.DronesMRE.TIME_STEP;
 
 public class MoveAggregateEvent extends BasicSimStateChange<DroneGroupAggregate, Object> {
 

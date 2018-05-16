@@ -1,7 +1,6 @@
 package app.event;
 
 
-import app.event.Message;
 import app.sim.agent.BasicAgent;
 import app.sim.network.Network;
 import dissim.broker.IEvent;
@@ -25,7 +24,6 @@ public class MessageFilter implements IEventFilter {
         if (iEvent.getClass() == Message.class) {
             BasicAgent sender = ((Message) iEvent).getSender();
             filterResult.addAll(network.getNeighbours(sender));
-//            System.out.println("Message Filter result: " + filterResult.toString());
             return filterResult;
         } else {
             return filterResult;

@@ -5,18 +5,13 @@ import net.xeoh.plugins.base.annotations.PluginImplementation;
 
 @PluginImplementation
 public class Context extends BasicSimContext implements SimContextInterface {
-
-    ObiektSymulacyjny obiektSymulacyjny;
-
-    public Context() {
+        public Context() {
         super();
-        System.out.println("Init context1");
     }
 
     public void initContext(){
         try {
-            System.out.println("Init context2");
-            obiektSymulacyjny = new ObiektSymulacyjny(this);
+            new DronesMRE(this);
             SimModel.getInstance().setEndSimTime(100.0D);
         }
         catch (SimControlException e){e.printStackTrace();}
