@@ -12,13 +12,13 @@ public class DroneGroupDeaggregate extends ResolutionLevel{
 
     private int agentActivationCount = 0;
     private ArrayList<Agent> agents = new ArrayList<>();
-    private ArrayList<Boolean> activated = new ArrayList<>();
+    private ArrayList<Boolean> synchronization = new ArrayList<>();
 
     public DroneGroupDeaggregate(Context context, IAggregation dronesAggregation, ArrayList<Agent> droneFormation) {
         super(context, dronesAggregation);
         this.agents = droneFormation;
         for(int i = 0 ; i < agents.size() ; i++){
-            activated.add(false);
+            synchronization.add(false);
         }
     }
 
@@ -31,16 +31,21 @@ public class DroneGroupDeaggregate extends ResolutionLevel{
 
     public void deactivate(){
         agentActivationCount = 0;
-        activated.forEach(activation  -> activation = false);
+        synchronization.clear();
+        for(int i = 0 ; i < agents.size() ; i++){
+            synchronization.add(false);
+        }
     }
 
     public void nextAgentActivated(){
-        activated.set(agentActivationCount, true);
+        synchronization.set(agentActivationCount, true);
         agentActivationCount++;
     }
 
-    public boolean isActivated(){
-        return  !activated.contains(false);
+    public boolean getSynchronization(){
+        synchronization.set(agentActivationCount, true);
+        agentActivationCount++;
+        return  !synchronization.contains(false);
     }
 
 }

@@ -30,14 +30,16 @@ public class EstablishFormationEvent extends BasicSimStateChange<Agent, Resoluti
     protected void transition() throws SimControlException {
         lastPosition = getSimEntity().getPosition();
         getSimEntity().nextFormationPosition();
-        logger.warn(simTime() + ":" + getSimEntity().getId() + " - " + getSimEntity().getPosition());
+        logger.warn(simTime() + ":" + getSimEntity().getId() + " - " + getSimEntity().getPosition() + " ");
         if(!checkPositionPrecision())
             new EstablishFormationEvent(getSimEntity(), TIME_STEP, getTransitionParams());
         else{
             DroneGroupDeaggregate droneGroupDeaggregate = (DroneGroupDeaggregate)getTransitionParams().getChild();
-            droneGroupDeaggregate.nextAgentActivated();
-            if(droneGroupDeaggregate.isActivated())
+            if(droneGroupDeaggregate.getSynchronization()){
+                droneGroupDeaggregate.deactivate();
                 new AggregationEvent(getTransitionParams().getChild());
+            }
+
         }
     }
 

@@ -2,6 +2,9 @@ package app.event;
 
 
 import app.entity.Agent;
+import app.entity.DroneGroupAggregate;
+import app.entity.DroneGroupDeaggregate;
+import app.visualisation.Visualization;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
@@ -31,6 +34,18 @@ public class AggregateFormationEvent extends BasicSimStateChange<Agent, Resoluti
         logger.warn(simTime() + ":" + getSimEntity().getId() + " - " + getSimEntity().getPosition());
         if(!checkPositionPrecision())
             new AggregateFormationEvent(getSimEntity(), TIME_STEP, getTransitionParams());
+        else{
+            DroneGroupDeaggregate droneGroupDeaggregate = (DroneGroupDeaggregate)getTransitionParams();
+            if(droneGroupDeaggregate.getSynchronization()){ //deaktywacja deag i aktywacja agg
+                droneGroupDeaggregate.deactivate();
+                Visualization.removeResolutionAgentsToDraw(droneGroupDeaggregate.getAgents());
+                DroneGroupAggregate aggregate = (DroneGroupAggregate)droneGroupDeaggregate.getParent();
+                aggregate.getAgent().setPosition(mean(droneGroupDeaggregate.getAgents()));
+                Visualization.addResolutionAgentsToDraw(aggregate.getAgents());
+
+                new MoveAggregateEvent(aggregate, TIME_STEP);
+            }
+        }
 
     }
 
@@ -41,12 +56,12 @@ public class AggregateFormationEvent extends BasicSimStateChange<Agent, Resoluti
         return nextPosition;
     }
 
-    private Point2D mean(ArrayList<Agent> predecessors){
+    private Point2D mean(ArrayList<Agent> agents){
         Point2D meanPoint = new Point2D(0.0,0.0);
-        for(Agent predecessor : predecessors){
+        for(Agent predecessor : agents){
             meanPoint = meanPoint.add(predecessor.getPosition());
         }
-        return meanPoint.multiply(1.0/predecessors.size());
+        return meanPoint.multiply(1.0/agents.size());
     }
 
     private boolean checkPositionPrecision(){

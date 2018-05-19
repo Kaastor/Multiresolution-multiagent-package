@@ -45,16 +45,16 @@ public class Visualization extends Pane {
     public static void addResolutionAgentsToDraw(ArrayList<Agent> agentsList) {
         draw = false;
         agents.addAll(agentsList);
-        updateagentRepresentations();
+        updateAgentRepresentations();
     }
 
     public static void removeResolutionAgentsToDraw(ArrayList<Agent> agentsList){
         draw = false;
         agents.removeAll(agentsList);
-        updateagentRepresentations();
+        updateAgentRepresentations();
     }
 
-    private static void updateagentRepresentations(){
+    private static void updateAgentRepresentations(){
         agentRepresentations.clear();
         agents.forEach(agent -> agentRepresentations.add(agent.getGraphicRepresentation()));
     }

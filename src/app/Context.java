@@ -18,9 +18,13 @@ public class Context extends BasicSimContext implements SimContextInterface {
     public void initContext() {
         try {
             new SeekDronesMRE(this, new Point2D(2.0, 2.0), 5,0.1, 0.1);
-            new AttackDronesMRE(this, new Point2D(12.0, 12.0), 5,0.1, 0.1);
+//            new AttackDronesMRE(this, new Point2D(2.0, 7.0), 5,0.1, 0.1);
+//            new SeekDronesMRE(this, new Point2D(2.0, 12.0), 5,0.1, 0.1);
+//            new AttackDronesMRE(this, new Point2D(2.0, 17.0), 5,0.1, 0.1);
+//            new SeekDronesMRE(this, new Point2D(2.0, 22.0), 5,0.1, 0.1);
+//            new AttackDronesMRE(this, new Point2D(2.0, 30.0), 5,0.1, 0.1);
 
-            SimModel.getInstance().setEndSimTime(100.0D);
+            SimModel.getInstance().setEndSimTime(1000.0D);
         } catch (SimControlException e) {
             e.printStackTrace();
         }
