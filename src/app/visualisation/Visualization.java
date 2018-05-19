@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 public class Visualization extends Pane {
 
+    public static final double AGGREGATE_CIRCLE_RADIUS = 15d;
+    public static final double DEAGGREGATE_CIRCLE_RADIUS = 8d;
+
     private static ArrayList<Agent> agents = new ArrayList<>();
     private static ArrayList<Circle> agentRepresentations = new ArrayList<>();
 

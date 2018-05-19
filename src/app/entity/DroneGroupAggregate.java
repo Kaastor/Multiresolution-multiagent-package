@@ -17,7 +17,7 @@ public class DroneGroupAggregate extends ResolutionLevel{
     public DroneGroupAggregate(Context context, IDeaggregation deaggregation, Point2D startingPosition) {
         super(context, deaggregation);
         agents = new ArrayList<>();
-        agents.add( new Agent(context, startingPosition, Visualization.randomColor()));
+        agents.add( new Agent(context, startingPosition, Visualization.randomColor(), Visualization.AGGREGATE_CIRCLE_RADIUS));
         visualizationInit();
     }
 

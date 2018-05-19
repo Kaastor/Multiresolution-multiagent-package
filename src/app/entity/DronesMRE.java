@@ -39,7 +39,7 @@ abstract class DronesMRE {
         ArrayList<Agent> agents = new ArrayList<>();
         Color color =  Visualization.randomColor();
         for(int i = 0 ; i < agentsNumber ; i++){
-            agents.add(new Agent(context, network, new Point2D(0.0,0.0), color));
+            agents.add(new Agent(context, network, new Point2D(0.0,0.0), color, Visualization.DEAGGREGATE_CIRCLE_RADIUS));
         }
         network.addAgents(agents);
         initializeNetwork();

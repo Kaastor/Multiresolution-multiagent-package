@@ -26,26 +26,26 @@ public class Agent extends BasicAgent{
     private ArrayList<Agent> predecessors;
     private FormationControl formation;
 
-    public Agent(Context context, Network network, Point2D position, Color color){
+    public Agent(Context context, Network network, Point2D position, Color color, double circleRadius){
         super(context);
         this.network = network;
         this.predecessors = new ArrayList<>();
         setPosition(position);
         context.getContextEventBroker().subscribe(Message.class, this);
-        initGraphicRepresentation(color);
+        initGraphicRepresentation(color, circleRadius);
     }
 
-    public Agent(Context context, Point2D position, Color color){
+    public Agent(Context context, Point2D position, Color color, double circleRadius){
         super(context);
         setPosition(position);
-        initGraphicRepresentation(color);
+        initGraphicRepresentation(color, circleRadius);
     }
 
-    private void initGraphicRepresentation(Color color){
+    private void initGraphicRepresentation(Color color, double circleRadius){
         graphicRepresentation = new Circle();
         graphicRepresentation.setStroke(color);
         graphicRepresentation.setFill(color);
-        graphicRepresentation.setRadius(8d);
+        graphicRepresentation.setRadius(circleRadius);
         graphicRepresentation.setCenterX(getPosition().getX());
         graphicRepresentation.setCenterY(getPosition().getY());
     }
