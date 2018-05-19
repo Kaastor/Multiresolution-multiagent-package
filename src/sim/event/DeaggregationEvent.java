@@ -1,7 +1,7 @@
-package app.sim.event;
+package sim.event;
 
-import app.sim.resolution.IDeaggregation;
-import app.sim.resolution.ResolutionLevel;
+import sim.resolution.IDeaggregation;
+import sim.resolution.ResolutionLevel;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 

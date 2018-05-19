@@ -1,4 +1,4 @@
-package app.sim.formation;
+package sim.formation;
 
 
 import javafx.geometry.Point2D;

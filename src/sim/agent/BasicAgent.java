@@ -1,4 +1,4 @@
-package app.sim.agent;
+package sim.agent;
 
 import app.Context;
 import dissim.broker.IEventSubscriber;

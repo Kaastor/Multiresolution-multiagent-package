@@ -3,9 +3,10 @@ package app.entity;
 
 import app.Context;
 import app.event.Message;
-import app.sim.agent.BasicAgent;
-import app.sim.formation.FormationControl;
-import app.sim.network.Network;
+import javafx.scene.paint.Color;
+import sim.agent.BasicAgent;
+import sim.formation.FormationControl;
+import sim.network.Network;
 import dissim.broker.IEvent;
 import dissim.broker.IEventPublisher;
 import dissim.simspace.core.SimControlException;
@@ -24,25 +25,25 @@ public class Agent extends BasicAgent{
     private Set<Agent> predecessors;
     private FormationControl formation;
 
-    public Agent(Context context, Network network, Point2D position){
+    public Agent(Context context, Network network, Point2D position, Color color){
         super(context);
         this.network = network;
         this.predecessors = new HashSet<>();
         setPosition(position);
         context.getContextEventBroker().subscribe(Message.class, this);
-        initGraphicRepresentation();
+        initGraphicRepresentation(color);
     }
 
-    public Agent(Context context, Point2D position){
+    public Agent(Context context, Point2D position, Color color){
         super(context);
         setPosition(position);
-        initGraphicRepresentation();
+        initGraphicRepresentation(color);
     }
 
-    private void initGraphicRepresentation(){
+    private void initGraphicRepresentation(Color color){
         graphicRepresentation = new Circle();
-        graphicRepresentation.setStroke(Visualization.randomColor());
-        graphicRepresentation.setFill(Visualization.randomColor());
+        graphicRepresentation.setStroke(color);
+        graphicRepresentation.setFill(color);
         graphicRepresentation.setRadius(8d);
         graphicRepresentation.setCenterX(getPosition().getX());
         graphicRepresentation.setCenterY(getPosition().getY());

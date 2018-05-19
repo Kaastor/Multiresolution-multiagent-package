@@ -3,8 +3,10 @@ package app.entity;
 
 import app.visualisation.Visualization;
 import app.event.EstablishFormationEvent;
-import app.sim.resolution.IDeaggregation;
+import sim.resolution.IDeaggregation;
 import dissim.simspace.core.SimControlException;
+
+import static app.DronesMRE.TIME_STEP;
 
 public class DeaggregationImpl implements IDeaggregation {
 
@@ -12,15 +14,18 @@ public class DeaggregationImpl implements IDeaggregation {
     public Object deaggregate(Object param) {
         DroneGroupAggregate droneGroupAggregate = (DroneGroupAggregate)param;
         DroneGroupDeaggregate droneGroupDeaggregate = (DroneGroupDeaggregate)droneGroupAggregate.getChild();
-        Visualization.setAgents(droneGroupDeaggregate.getAgents());
+
+        Visualization.removeResolutionAgentsToDraw(droneGroupAggregate.getAgents());
+        Visualization.addResolutionAgentsToDraw(droneGroupDeaggregate.getAgents());
+
         droneGroupDeaggregate.getAgents().forEach(agent -> agent.setPosition(
-                droneGroupAggregate.getGroupAggregate().getPosition()));
+                droneGroupAggregate.getAgent().getPosition()));
 
         droneGroupDeaggregate.getAgents().forEach(Agent::initialize);
 
         droneGroupDeaggregate.getAgents().forEach(agent -> {
             try {
-                new EstablishFormationEvent(agent);
+                new EstablishFormationEvent(agent, TIME_STEP);
             }
             catch (SimControlException e) {e.printStackTrace();}});
 

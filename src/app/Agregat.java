@@ -2,9 +2,9 @@ package app;
 
 
 import dissim.simspace.core.SimControlException;
-import app.sim.event.AggregationEvent;
-import app.sim.resolution.IAggregation;
-import app.sim.resolution.ResolutionLevel;
+import sim.event.AggregationEvent;
+import sim.resolution.IAggregation;
+import sim.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 

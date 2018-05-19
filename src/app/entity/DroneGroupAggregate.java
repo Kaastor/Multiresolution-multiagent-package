@@ -2,8 +2,8 @@ package app.entity;
 
 
 import app.Context;
-import app.sim.resolution.IDeaggregation;
-import app.sim.resolution.ResolutionLevel;
+import sim.resolution.IDeaggregation;
+import sim.resolution.ResolutionLevel;
 import javafx.geometry.Point2D;
 import app.visualisation.Visualization;
 
@@ -12,18 +12,17 @@ import java.util.ArrayList;
 
 public class DroneGroupAggregate extends ResolutionLevel{
 
-    private Agent groupAggregate;
+    private ArrayList<Agent> agents;
 
-    public DroneGroupAggregate(Context context, IDeaggregation deaggregation) {
+    public DroneGroupAggregate(Context context, IDeaggregation deaggregation, Point2D startingPosition) {
         super(context, deaggregation);
-        groupAggregate = new Agent(context, new Point2D(4.0,4.0));
-        initialization();
+        agents = new ArrayList<>();
+        agents.add( new Agent(context, startingPosition, Visualization.randomColor()));
+        visualizationInit();
     }
 
-    private void initialization(){
-        ArrayList<Agent> agent = new ArrayList<>();
-        agent.add(groupAggregate);
-        Visualization.setAgents(agent);
+    private void visualizationInit(){
+        Visualization.addResolutionAgentsToDraw(agents);
     }
 
     @Override
@@ -31,7 +30,12 @@ public class DroneGroupAggregate extends ResolutionLevel{
 
     }
 
-    public Agent getGroupAggregate() {
-        return groupAggregate;
+    public ArrayList<Agent> getAgents() {
+        return agents;
     }
+
+    public Agent getAgent() {
+        return agents.get(0);
+    }
+
 }

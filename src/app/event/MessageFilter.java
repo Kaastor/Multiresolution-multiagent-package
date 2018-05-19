@@ -1,8 +1,8 @@
 package app.event;
 
 
-import app.sim.agent.BasicAgent;
-import app.sim.network.Network;
+import sim.agent.BasicAgent;
+import sim.network.Network;
 import dissim.broker.IEvent;
 import dissim.broker.IEventFilter;
 import dissim.broker.IEventSubscriber;
@@ -24,6 +24,7 @@ public class MessageFilter implements IEventFilter {
         if (iEvent.getClass() == Message.class) {
             BasicAgent sender = ((Message) iEvent).getSender();
             filterResult.addAll(network.getNeighbours(sender));
+            System.out.println(sender.simTime() + "- Message has been send from agent: " + sender.getId() + " to: " + network.getNeighbours(sender).toString());
             return filterResult;
         } else {
             return filterResult;

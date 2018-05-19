@@ -2,11 +2,13 @@ package app.entity;
 
 
 import app.Context;
-import app.sim.formation.FormationControl;
-import app.sim.formation.FormationGraph;
-import app.sim.formation.PositionVector;
-import app.sim.network.Network;
-import app.sim.resolution.ResolutionLevel;
+import app.visualisation.Visualization;
+import javafx.scene.paint.Color;
+import sim.formation.FormationControl;
+import sim.formation.FormationGraph;
+import sim.formation.PositionVector;
+import sim.network.Network;
+import sim.resolution.ResolutionLevel;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -25,8 +27,9 @@ public class DroneGroupDeaggregate extends ResolutionLevel{
     public void stateChange(Object result) {}
 
     private void initialization(Context context){
+        Color color =  Visualization.randomColor();
         for(int i = 0 ; i < 5 ; i++){
-            agents.add(new Agent(context, network, new Point2D(0.0,0.0)));
+            agents.add(new Agent(context, network, new Point2D(0.0,0.0), color));
         }
         network.addAgents(agents);
         initializeNetwork();

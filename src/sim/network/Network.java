@@ -1,7 +1,7 @@
-package app.sim.network;
+package sim.network;
 
 
-import app.sim.agent.BasicAgent;
+import sim.agent.BasicAgent;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 
 import java.util.ArrayList;

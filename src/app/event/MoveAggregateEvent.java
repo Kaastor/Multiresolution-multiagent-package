@@ -2,7 +2,7 @@ package app.event;
 
 
 import app.entity.DroneGroupAggregate;
-import app.sim.event.DeaggregationEvent;
+import sim.event.DeaggregationEvent;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 
@@ -22,10 +22,10 @@ public class MoveAggregateEvent extends BasicSimStateChange<DroneGroupAggregate,
 
     @Override
     protected void transition() throws SimControlException {
-        getSimEntity().getGroupAggregate().setPosition(
-                getSimEntity().getGroupAggregate().getPosition().add(1.0, 0.0)
+        getSimEntity().getAgent().setPosition(
+                getSimEntity().getAgent().getPosition().add(1.0, 0.0)
         );
-        System.out.println(simTime() + " Aggregate moving to: " + getSimEntity().getGroupAggregate().getPosition());
+        System.out.println(simTime() + " Aggregate moving to: " + getSimEntity().getAgent().getPosition());
         if(++count < 10)
             new MoveAggregateEvent(getSimEntity(), TIME_STEP);
         else

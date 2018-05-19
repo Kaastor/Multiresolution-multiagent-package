@@ -1,8 +1,8 @@
 package app.entity;
 
 
-import app.sim.resolution.IAggregation;
-import app.sim.resolution.ResolutionLevel;
+import sim.resolution.IAggregation;
+import sim.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 

@@ -2,7 +2,7 @@ package app.event;
 
 
 import app.entity.Agent;
-import app.sim.agent.BasicAgent;
+import sim.agent.BasicAgent;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 
@@ -24,7 +24,7 @@ public class Message extends BasicSimStateChange<Agent, Object> {
 
     @Override
     protected void transition() throws SimControlException {
-        System.out.println(simTime() + "- Message has been send from agent: " + getSender().getId());
+
     }
 
     BasicAgent getSender() {

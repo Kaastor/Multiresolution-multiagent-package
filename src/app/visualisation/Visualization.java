@@ -42,11 +42,21 @@ public class Visualization extends Pane {
         return Color.rgb((int) (generator.nextDouble() * range), (int) (generator.nextDouble() * range), (int) (generator.nextDouble() * range));
     }
 
-    public static void setAgents(ArrayList<Agent> agentsList) {
+    public static void addResolutionAgentsToDraw(ArrayList<Agent> agentsList) {
         draw = false;
-        agents = agentsList;
+        agents.addAll(agentsList);
+        updateagentRepresentations();
+    }
+
+    public static void removeResolutionAgentsToDraw(ArrayList<Agent> agentsList){
+        draw = false;
+        agents.removeAll(agentsList);
+        updateagentRepresentations();
+    }
+
+    private static void updateagentRepresentations(){
         agentRepresentations.clear();
-        agentsList.forEach(agent -> agentRepresentations.add(agent.getGraphicRepresentation()));
+        agents.forEach(agent -> agentRepresentations.add(agent.getGraphicRepresentation()));
     }
 
 }

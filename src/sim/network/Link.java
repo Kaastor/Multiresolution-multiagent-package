@@ -1,4 +1,4 @@
-package app.sim.network;
+package sim.network;
 
 import javafx.geometry.Point2D;
 import org.jgrapht.graph.DefaultWeightedEdge;

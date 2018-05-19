@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 
 
 import static app.DronesMRE.TIME_STEP;
-import static app.sim.formation.FormationControl.POSITION_PRECISION;
+import static sim.formation.FormationControl.POSITION_PRECISION;
 
 
 public class EstablishFormationEvent extends BasicSimStateChange<Agent, Object> {
