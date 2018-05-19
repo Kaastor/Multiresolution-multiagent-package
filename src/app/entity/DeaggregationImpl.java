@@ -6,7 +6,7 @@ import app.event.EstablishFormationEvent;
 import sim.resolution.IDeaggregation;
 import dissim.simspace.core.SimControlException;
 
-import static app.DronesMRE.TIME_STEP;
+import static app.Context.TIME_STEP;
 
 public class DeaggregationImpl implements IDeaggregation {
 

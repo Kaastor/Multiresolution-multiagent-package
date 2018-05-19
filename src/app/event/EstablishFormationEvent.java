@@ -7,7 +7,7 @@ import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 
 
-import static app.DronesMRE.TIME_STEP;
+import static app.Context.TIME_STEP;
 import static sim.formation.FormationControl.POSITION_PRECISION;
 
 
