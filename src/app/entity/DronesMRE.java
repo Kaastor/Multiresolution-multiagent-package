@@ -6,6 +6,7 @@ import app.entity.state.AggregationImpl;
 import app.entity.state.DeaggregationImpl;
 import app.event.MoveAggregateEvent;
 import app.visualisation.Visualization;
+import dissim.monitors.Diagram;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 
 abstract class DronesMRE {
 
+    private DroneGroupAggregate droneGroupAggregate;
+    private DroneGroupDeaggregate droneGroupDeaggregate;
     private Network network = new Network();
 
     DronesMRE(Context context, Point2D startingPosition, int agentsNumber, double T, double K) throws SimControlException {
@@ -27,8 +30,8 @@ abstract class DronesMRE {
         IAggregation dronesAggregation = new AggregationImpl();
         IDeaggregation dronesDeagregation = new DeaggregationImpl();
 
-        DroneGroupAggregate droneGroupAggregate = new DroneGroupAggregate(context, dronesDeagregation, startingPosition);
-        DroneGroupDeaggregate droneGroupDeaggregate = new DroneGroupDeaggregate(context, dronesAggregation, formationInitialization(context, agentsNumber, T, K));
+        droneGroupAggregate = new DroneGroupAggregate(context, dronesDeagregation, startingPosition);
+        droneGroupDeaggregate = new DroneGroupDeaggregate(context, dronesAggregation, formationInitialization(context, agentsNumber, T, K));
         droneGroupAggregate.setChild(droneGroupDeaggregate);
         droneGroupDeaggregate.setParent(droneGroupAggregate);
 
@@ -56,5 +59,12 @@ abstract class DronesMRE {
 
     public Network getNetwork() {
         return network;
+    }
+
+    public void simulationResults(){
+        Diagram d1 = new Diagram(Diagram.DiagramType.HISTOGRAM, "Czas Deagregacji");
+        d1.add(droneGroupAggregate.deagreggationTimeMonitor, java.awt.Color.GREEN);
+        System.out.println();
+        d1.show();
     }
 }

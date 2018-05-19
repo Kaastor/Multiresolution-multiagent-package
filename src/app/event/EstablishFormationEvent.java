@@ -2,6 +2,7 @@ package app.event;
 
 
 import app.entity.Agent;
+import app.entity.DroneGroupAggregate;
 import app.entity.DroneGroupDeaggregate;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
@@ -35,6 +36,11 @@ public class EstablishFormationEvent extends BasicSimStateChange<Agent, Resoluti
         else{
             DroneGroupDeaggregate droneGroupDeaggregate = (DroneGroupDeaggregate)getTransitionParams().getChild();
             if(droneGroupDeaggregate.getSynchronization()){
+                DroneGroupAggregate droneGroupAggregate = (DroneGroupAggregate)getTransitionParams();
+
+                droneGroupAggregate.deagreggationTimeMonitor.setValue(droneGroupDeaggregate.simTime() -
+                        droneGroupAggregate.deaggregationStart);
+
                 droneGroupDeaggregate.deactivate();
                 new AggregationEvent(getTransitionParams().getChild());
             }

@@ -53,5 +53,14 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+//        try {
+//            SimModel model = SimModel.getInstance();
+//            model.ASAPSimulation();
+//            model.setSimTimeRatio(SIM_TIME_RATIO);
+//            model.startSimulation();
+//        }
+//        catch (SimControlException e){
+//            e.printStackTrace();
+//        }
     }
 }

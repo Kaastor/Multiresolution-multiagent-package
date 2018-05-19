@@ -19,6 +19,8 @@ public class DeaggregationImpl implements IDeaggregation {
         DroneGroupAggregate droneGroupAggregate = (DroneGroupAggregate) param;
         DroneGroupDeaggregate droneGroupDeaggregate = (DroneGroupDeaggregate) droneGroupAggregate.getChild();
 
+        droneGroupAggregate.deaggregationStart = droneGroupAggregate.simTime();
+
         Visualization.removeResolutionAgentsToDraw(droneGroupAggregate.getAgents());
         Visualization.addResolutionAgentsToDraw(droneGroupDeaggregate.getAgents());
 

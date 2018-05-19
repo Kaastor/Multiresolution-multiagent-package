@@ -2,6 +2,7 @@ package app.entity;
 
 
 import app.Context;
+import dissim.monitors.MonitoredVar;
 import sim.resolution.IDeaggregation;
 import sim.resolution.ResolutionLevel;
 import javafx.geometry.Point2D;
@@ -11,6 +12,9 @@ import java.util.ArrayList;
 
 
 public class DroneGroupAggregate extends ResolutionLevel{
+
+    public MonitoredVar deagreggationTimeMonitor = new MonitoredVar();
+    public double deaggregationStart;
 
     private ArrayList<Agent> agents;
 

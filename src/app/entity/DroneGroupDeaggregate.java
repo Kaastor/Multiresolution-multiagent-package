@@ -3,12 +3,15 @@ package app.entity;
 
 import app.Context;
 
+import dissim.monitors.MonitoredVar;
 import sim.resolution.IAggregation;
 import sim.resolution.ResolutionLevel;
 
 import java.util.ArrayList;
 
 public class DroneGroupDeaggregate extends ResolutionLevel{
+
+    public MonitoredVar agreggationTimeMonitor = new MonitoredVar();
 
     private int agentActivationCount = 0;
     private ArrayList<Agent> agents = new ArrayList<>();

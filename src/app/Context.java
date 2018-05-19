@@ -10,6 +10,8 @@ import net.xeoh.plugins.base.annotations.PluginImplementation;
 public class Context extends BasicSimContext implements SimContextInterface {
 
     public static final double TIME_STEP = 1.0;
+    private SeekDronesMRE seekDronesMRE;
+    private AttackDronesMRE attackDronesMRE;
 
     public Context() {
         super();
@@ -17,10 +19,10 @@ public class Context extends BasicSimContext implements SimContextInterface {
 
     public void initContext() {
         try {
-            new SeekDronesMRE(this, new Point2D(2.0, 2.0), 5,0.1, 0.1);
-            new AttackDronesMRE(this, new Point2D(2.0, 7.0), 5,0.1, 0.1);
+            seekDronesMRE = new SeekDronesMRE(this, new Point2D(2.0, 2.0), 5,0.1, 0.1);
+            attackDronesMRE = new AttackDronesMRE(this, new Point2D(2.0, 7.0), 5,0.1, 0.1);
 
-            SimModel.getInstance().setEndSimTime(1000.0D);
+            SimModel.getInstance().setEndSimTime(400.0D);
         } catch (SimControlException e) {
             e.printStackTrace();
         }
@@ -35,6 +37,8 @@ public class Context extends BasicSimContext implements SimContextInterface {
     }
 
     public void stopContext() {
+        seekDronesMRE.simulationResults();
+        attackDronesMRE.simulationResults();
     }
 
     public void clearContext() {
