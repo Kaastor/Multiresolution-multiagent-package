@@ -11,7 +11,7 @@ import sim.resolution.ResolutionLevel;
 import java.util.ArrayList;
 
 import static app.Context.TIME_STEP;
-import static sim.formation.FormationControl.DISTANCE_PRECISION;
+import static sim.formation.FormationControl.AGGREGATION_DISTANCE_PRECISION;
 
 public class AggregateFormationEvent extends BasicSimStateChange<Agent, ResolutionLevel> {
 
@@ -49,18 +49,8 @@ public class AggregateFormationEvent extends BasicSimStateChange<Agent, Resoluti
         return meanPoint.multiply(1.0/predecessors.size());
     }
 
-//    private boolean checkPositionPrecision(){
-//        double distanceFromPredecessor = lastPosition.distance(getSimEntity().getPredecessors().get(0).getPosition());
-//        double desiredDistance = euclideanDistance(getSimEntity().getFormation().getConnectionVector(getSimEntity().getPredecessors().get(0), getSimEntity()));
-//        return Math.abs(desiredDistance - distanceFromPredecessor) < AGGREGATION_DISTANCE_PRECISION;
-//    }
-//
-//    private double euclideanDistance(Point2D p1){
-//        return Math.sqrt(Math.pow(p1.getX(), 2) + Math.pow(p1.getY(), 2));
-//    }
-
     private boolean checkPositionPrecision(){
-        return euclideanDistance(lastPosition, nextPosition) < DISTANCE_PRECISION;
+        return euclideanDistance(lastPosition, nextPosition) < AGGREGATION_DISTANCE_PRECISION;
     }
 
     private double euclideanDistance(Point2D p1, Point2D p2){

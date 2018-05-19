@@ -2,6 +2,7 @@ package app.event;
 
 
 import app.entity.Agent;
+import app.entity.DroneGroupDeaggregate;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
@@ -19,7 +20,6 @@ public class EstablishFormationEvent extends BasicSimStateChange<Agent, Resoluti
     private final static Logger logger = Logger.getLogger(EstablishFormationEvent.class);
 
     private Point2D lastPosition;
-    private Point2D nextPosition;
 
     public EstablishFormationEvent(Agent agent, double delay, ResolutionLevel resolution) throws SimControlException{
         super(agent, delay, resolution);
@@ -29,12 +29,16 @@ public class EstablishFormationEvent extends BasicSimStateChange<Agent, Resoluti
     @Override
     protected void transition() throws SimControlException {
         lastPosition = getSimEntity().getPosition();
-        nextPosition = getSimEntity().nextFormationPosition();
+        getSimEntity().nextFormationPosition();
         logger.warn(simTime() + ":" + getSimEntity().getId() + " - " + getSimEntity().getPosition());
         if(!checkPositionPrecision())
             new EstablishFormationEvent(getSimEntity(), TIME_STEP, getTransitionParams());
-        else
-            new AggregationEvent(getTransitionParams().getChild());
+        else{
+            DroneGroupDeaggregate droneGroupDeaggregate = (DroneGroupDeaggregate)getTransitionParams().getChild();
+            droneGroupDeaggregate.nextAgentActivated();
+            if(droneGroupDeaggregate.isActivated())
+                new AggregationEvent(getTransitionParams().getChild());
+        }
     }
 
     private boolean checkPositionPrecision(){

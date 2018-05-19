@@ -10,7 +10,6 @@ public abstract class ResolutionLevel extends BasicSimEntity {
     private IDeaggregation deaggregation;
     private ResolutionLevel parent;
     private ResolutionLevel child;
-    private boolean hibernated = true;
 
     public ResolutionLevel(Context context, IDeaggregation deaggregation, IAggregation aggregation) {
         super(context);
@@ -64,11 +63,4 @@ public abstract class ResolutionLevel extends BasicSimEntity {
         return child;
     }
 
-    public boolean isHibernated() {
-        return hibernated;
-    }
-
-    public void setHibernated(boolean hibernated) {
-        this.hibernated = hibernated;
-    }
 }

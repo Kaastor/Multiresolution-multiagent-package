@@ -11,6 +11,7 @@ import java.util.Set;
 public class FormationControl {
 
     public static final double DISTANCE_PRECISION = 0.1;
+    public static final double AGGREGATION_DISTANCE_PRECISION = 0.01;
 
     private FormationGraph formationGraph;
     private double T;
