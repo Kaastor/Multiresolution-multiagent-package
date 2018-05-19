@@ -1,6 +1,7 @@
 package app.event;
 
 
+import org.apache.log4j.Logger;
 import sim.agent.BasicAgent;
 import sim.network.Network;
 import dissim.broker.IEvent;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageFilter implements IEventFilter {
+
+    private final static Logger logger = Logger.getLogger(MessageFilter.class);
 
     private List<IEventSubscriber> filterResult = new ArrayList<>();
     private Network network;
@@ -24,7 +27,7 @@ public class MessageFilter implements IEventFilter {
         if (iEvent.getClass() == Message.class) {
             BasicAgent sender = ((Message) iEvent).getSender();
             filterResult.addAll(network.getNeighbours(sender));
-            System.out.println(sender.simTime() + "- Message has been send from agent: " + sender.getId() + " to: " + network.getNeighbours(sender).toString());
+//            logger.info(sender.simTime() + "- Message has been send from agent: " + sender.getId() + " to: " + network.getNeighbours(sender).toString());
             return filterResult;
         } else {
             return filterResult;

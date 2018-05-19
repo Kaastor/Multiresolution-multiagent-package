@@ -1,7 +1,9 @@
-package app;
+package app.entity;
 
 
-import app.entity.*;
+import app.Context;
+import app.entity.state.AggregationImpl;
+import app.entity.state.DeaggregationImpl;
 import app.event.MoveAggregateEvent;
 import app.visualisation.Visualization;
 import dissim.simspace.core.SimControlException;
@@ -26,7 +28,7 @@ abstract class DronesMRE {
         IDeaggregation dronesDeagregation = new DeaggregationImpl();
 
         DroneGroupAggregate droneGroupAggregate = new DroneGroupAggregate(context, dronesDeagregation, startingPosition);
-        DroneGroupDeaggregate droneGroupDeaggregate = new DroneGroupDeaggregate(context, formationInitialization(context, agentsNumber, T, K));
+        DroneGroupDeaggregate droneGroupDeaggregate = new DroneGroupDeaggregate(context, dronesAggregation, formationInitialization(context, agentsNumber, T, K));
         droneGroupAggregate.setChild(droneGroupDeaggregate);
         droneGroupDeaggregate.setParent(droneGroupAggregate);
 

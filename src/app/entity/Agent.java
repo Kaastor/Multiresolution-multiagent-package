@@ -14,6 +14,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import app.visualisation.Visualization;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,13 +23,13 @@ public class Agent extends BasicAgent{
 
     private Circle graphicRepresentation;
     private Network network;
-    private Set<Agent> predecessors;
+    private ArrayList<Agent> predecessors;
     private FormationControl formation;
 
     public Agent(Context context, Network network, Point2D position, Color color){
         super(context);
         this.network = network;
-        this.predecessors = new HashSet<>();
+        this.predecessors = new ArrayList<>();
         setPosition(position);
         context.getContextEventBroker().subscribe(Message.class, this);
         initGraphicRepresentation(color);
@@ -74,6 +75,10 @@ public class Agent extends BasicAgent{
         return nextPosition;
     }
 
+    public FormationControl getFormation() {
+        return formation;
+    }
+
     public Network getNetwork() {
         return this.network;
     }
@@ -86,7 +91,7 @@ public class Agent extends BasicAgent{
         this.formation = formation;
     }
 
-    public Set<Agent> getPredecessors() {
+    public ArrayList<Agent> getPredecessors() {
         return predecessors;
     }
 

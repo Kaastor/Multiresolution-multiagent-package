@@ -4,12 +4,13 @@ package sim.formation;
 import app.entity.Agent;
 import javafx.geometry.Point2D;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 
 public class FormationControl {
 
-    public static final double POSITION_PRECISION = 0.05;
+    public static final double DISTANCE_PRECISION = 0.1;
 
     private FormationGraph formationGraph;
     private double T;
@@ -22,6 +23,10 @@ public class FormationControl {
 
     }
 
+    public Point2D getConnectionVector(Agent from, Agent to){
+        return formationGraph.getConnection(from, to).getVector();
+    }
+
     public Point2D nextPosition(Agent agent){
         return agent.getPosition().add( velocityVector(agent).multiply(T) );
     }
@@ -32,7 +37,7 @@ public class FormationControl {
 
     private Point2D relativeDesiredPosition(Agent agent){
         Point2D desiredPosition = new Point2D(0.0,0.0);
-        Set<Agent> predecessors = agent.getPredecessors();
+        ArrayList<Agent> predecessors = agent.getPredecessors();
         int predecessorsNumber = predecessors.size();
 
         for(Agent predecessor : predecessors){
