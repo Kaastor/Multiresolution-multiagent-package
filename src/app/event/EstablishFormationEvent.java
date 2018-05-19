@@ -20,17 +20,16 @@ public class EstablishFormationEvent extends BasicSimStateChange<Agent, Resoluti
     private final static Logger logger = Logger.getLogger(EstablishFormationEvent.class);
 
     private Point2D lastPosition;
+    private Point2D nextPosition;
 
     public EstablishFormationEvent(Agent agent, double delay, ResolutionLevel resolution) throws SimControlException{
         super(agent, delay, resolution);
     }
 
-
     @Override
     protected void transition() throws SimControlException {
         lastPosition = getSimEntity().getPosition();
-        getSimEntity().nextFormationPosition();
-        logger.warn(simTime() + ":" + getSimEntity().getId() + " - " + getSimEntity().getPosition() + " ");
+        nextPosition = getSimEntity().nextFormationPosition();
         if(!checkPositionPrecision())
             new EstablishFormationEvent(getSimEntity(), TIME_STEP, getTransitionParams());
         else{
@@ -39,17 +38,11 @@ public class EstablishFormationEvent extends BasicSimStateChange<Agent, Resoluti
                 droneGroupDeaggregate.deactivate();
                 new AggregationEvent(getTransitionParams().getChild());
             }
-
         }
     }
 
     private boolean checkPositionPrecision(){
-        double distanceFromPredecessor = lastPosition.distance(getSimEntity().getPredecessors().get(0).getPosition());
-        double desiredDistance = euclideanDistance(getSimEntity().getFormation().getConnectionVector(getSimEntity().getPredecessors().get(0), getSimEntity()));
-        return Math.abs(desiredDistance - distanceFromPredecessor) < DISTANCE_PRECISION;
+        return lastPosition.distance(nextPosition) < DISTANCE_PRECISION;
     }
 
-    private double euclideanDistance(Point2D p1){
-        return Math.sqrt(Math.pow(p1.getX(), 2) + Math.pow(p1.getY(), 2));
-    }
 }

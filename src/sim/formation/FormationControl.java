@@ -5,12 +5,12 @@ import app.entity.Agent;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
-import java.util.Set;
+
 
 
 public class FormationControl {
 
-    public static final double DISTANCE_PRECISION = 0.1;
+    public static final double DISTANCE_PRECISION = 0.05;
     public static final double AGGREGATION_DISTANCE_PRECISION = 0.01;
 
     private FormationGraph formationGraph;
@@ -47,6 +47,11 @@ public class FormationControl {
         }
 
         return  desiredPosition.multiply(1.0/predecessorsNumber);
+    }
+
+    public Point2D formationError(Agent agent){
+        return agent.getPosition().subtract(relativeDesiredPosition(agent));
+
     }
 
 }
