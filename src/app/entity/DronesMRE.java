@@ -5,6 +5,7 @@ import app.Context;
 import app.entity.state.AggregationImpl;
 import app.entity.state.DeaggregationImpl;
 import app.event.MoveAggregateEvent;
+import app.event.WanderingEvent;
 import app.visualisation.Visualization;
 import dissim.monitors.Diagram;
 import dissim.simspace.core.SimControlException;
@@ -35,7 +36,8 @@ abstract class DronesMRE {
         droneGroupAggregate.setChild(droneGroupDeaggregate);
         droneGroupDeaggregate.setParent(droneGroupAggregate);
 
-        new MoveAggregateEvent(droneGroupAggregate);
+        //new MoveAggregateEvent(droneGroupAggregate);
+        new WanderingEvent(droneGroupAggregate);
     }
 
     private ArrayList<Agent> formationInitialization(Context context, int agentsNumber, double T, double K){

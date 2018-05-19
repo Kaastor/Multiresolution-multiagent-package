@@ -49,4 +49,5 @@ public abstract class BasicAgent extends BasicSimEntity implements IEventSubscri
     public void setPosition(Point2D position) {
         this.position = position;
     }
+
 }
