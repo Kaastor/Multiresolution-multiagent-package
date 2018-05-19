@@ -1,28 +1,27 @@
 package app;
 
 
-import app.entity.AggregationImpl;
-import app.entity.DeaggregationImpl;
-import app.entity.DroneGroupAggregate;
-import app.entity.DroneGroupDeaggregate;
-import app.event.MoveAggregateEvent;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
-import sim.resolution.IAggregation;
-import sim.resolution.IDeaggregation;
+import sim.formation.PositionVector;
 
-public class AttackDronesMRE {
+import java.util.ArrayList;
 
-    AttackDronesMRE(Context context, Point2D startingPosition) throws SimControlException {
+class AttackDronesMRE extends DronesMRE{
 
-        IAggregation dronesAggregation = new AggregationImpl();
-        IDeaggregation dronesDeagregation = new DeaggregationImpl();
 
-        DroneGroupAggregate droneGroupAggregate = new DroneGroupAggregate(context, dronesDeagregation, startingPosition);
-//        DroneGroupDeaggregate droneGroupDeaggregate = new DroneGroupDeaggregate(context);
-//        droneGroupAggregate.setChild(droneGroupDeaggregate);
-//        droneGroupDeaggregate.setParent(droneGroupAggregate);
+    AttackDronesMRE(Context context, Point2D startingPosition, int agentsNumber, double T, double K) throws SimControlException {
+        super(context, startingPosition, agentsNumber, T, K);
+    }
 
-        new MoveAggregateEvent(droneGroupAggregate);
+    void initializeNetwork(){
+
+    }
+
+    ArrayList<PositionVector> createPositionVectors(){
+        ArrayList<PositionVector> positionVectors = new ArrayList<>();
+
+
+        return positionVectors;
     }
 }
