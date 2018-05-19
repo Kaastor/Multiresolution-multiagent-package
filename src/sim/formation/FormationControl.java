@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class FormationControl {
 
-    public static final double POSITION_PRECISION = 0.01;
+    public static final double POSITION_PRECISION = 0.05;
 
     private FormationGraph formationGraph;
     private double T;

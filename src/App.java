@@ -39,7 +39,7 @@ public class App extends Application {
 
         BorderPane root = new BorderPane();
         root.setCenter(visualization);
-        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, Color.AZURE);
+        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
