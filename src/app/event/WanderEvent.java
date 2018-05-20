@@ -11,13 +11,14 @@ import org.apache.log4j.Logger;
 
 
 import static app.App.SCENE_HEIGHT;
+import static app.App.SCENE_OFFSET;
 import static app.App.SCENE_WIDTH;
 import static app.Context.TIME_STEP;
 
 
-public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Object> {
+public class WanderEvent extends BasicSimStateChange<DroneGroupAggregate, Object> {
 
-    private final Logger log = Logger.getLogger(WanderingEvent.class);
+    private final Logger log = Logger.getLogger(WanderEvent.class);
 
     private final SimGenerator simGenerator = new SimGenerator();
 
@@ -33,13 +34,18 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
     private double change = 0.65;
     private Point2D velocity = new Point2D(0.0,0.0);
     private Point2D acceleration = new Point2D(0.0,0.0);
+    private double missionTime;
 
-    public WanderingEvent(DroneGroupAggregate aggregate) throws SimControlException{
+    public WanderEvent(DroneGroupAggregate aggregate) throws SimControlException{
         super(aggregate);
         this.agent = aggregate.getAgent();
         circleRadius = agent.getGraphicRepresentation().getRadius();
-        agent.setPosition(new Point2D(500,500));
+        agent.setPosition(new Point2D(simGenerator.uniform(SCENE_OFFSET, SCENE_WIDTH-SCENE_OFFSET),
+                simGenerator.uniform(SCENE_OFFSET, SCENE_HEIGHT-SCENE_OFFSET)));
         activateRepetition(TIME_STEP);
+
+        missionTime = simGenerator.uniformInt(10, 20);
+        new MissionEvent(aggregate, missionTime);
     }
 
     @Override
@@ -47,6 +53,11 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
         wander();
         update();
         borders();
+        if (simTime() == missionTime) {
+            deactivateRepetition();
+            this.terminate();
+        }
+        log.warn(simTime() + " - " + agent.getId() + ": Wandering...");
     }
 
     private void wander(){
@@ -72,26 +83,6 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
         steer = limit(steer, maxForce);
 
         applyForce(steer);
-    }
-
-    private void arrive(Point2D target){
-        Point2D desired = target.subtract(agent.getPosition());
-        double d = desired.magnitude();
-
-        if( d < 100){
-            double m = map(d, 0 , 100,0, maxSpeed);
-            desired = desired.multiply(1.0/m);
-        }
-        else{
-            desired = desired.multiply(maxSpeed);
-        }
-        Point2D steer = desired.subtract(velocity);
-        steer = limit(steer, maxForce);
-        applyForce(steer);
-    }
-
-    private double map(double value, double start1, double stop1, double start2, double stop2) {
-        return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
     }
 
     private double getAngle(Point2D target) {

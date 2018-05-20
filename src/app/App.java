@@ -17,6 +17,7 @@ public class App extends Application {
     private static final double SIM_TIME_RATIO = 5.0;
     public static final double SCENE_WIDTH = 1200;
     public static final double SCENE_HEIGHT = 900;
+    public static final double SCENE_OFFSET = 150;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -36,13 +37,6 @@ public class App extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-//                try {
-//                    Thread.sleep(50);
-//
-//                }
-//                catch (InterruptedException e){
-//                    e.printStackTrace();
-//                }
                 visualization.updatePositions();
             }
         }.start();

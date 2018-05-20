@@ -2,6 +2,7 @@ package app.entity;
 
 
 import app.Context;
+import app.event.WanderEvent;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 import sim.formation.PositionVector;
@@ -10,9 +11,12 @@ import java.util.ArrayList;
 
 public class AttackDronesMRE extends DronesMRE{
 
+    private WanderEvent wandering;
 
     public AttackDronesMRE(Context context, Point2D startingPosition, int agentsNumber, double T, double K) throws SimControlException {
         super(context, startingPosition, agentsNumber, T, K);
+
+        wandering = new WanderEvent(getDroneGroupAggregate());
     }
 
     void initializeNetwork(){
@@ -38,5 +42,9 @@ public class AttackDronesMRE extends DronesMRE{
         positionVectors.add(new PositionVector(2,1, new Point2D(-6,0)));
 
         return positionVectors;
+    }
+
+    public WanderEvent getWandering() {
+        return wandering;
     }
 }

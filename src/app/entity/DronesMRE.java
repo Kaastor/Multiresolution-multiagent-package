@@ -4,8 +4,6 @@ package app.entity;
 import app.Context;
 import app.entity.state.AggregationImpl;
 import app.entity.state.DeaggregationImpl;
-import app.event.MoveAggregateEvent;
-import app.event.WanderingEvent;
 import app.visualisation.Visualization;
 import dissim.monitors.Diagram;
 import dissim.simspace.core.SimControlException;
@@ -26,6 +24,7 @@ abstract class DronesMRE {
     private DroneGroupDeaggregate droneGroupDeaggregate;
     private Network network = new Network();
 
+
     DronesMRE(Context context, Point2D startingPosition, int agentsNumber, double T, double K) throws SimControlException {
 
         IAggregation dronesAggregation = new AggregationImpl();
@@ -35,9 +34,6 @@ abstract class DronesMRE {
         droneGroupDeaggregate = new DroneGroupDeaggregate(context, dronesAggregation, formationInitialization(context, agentsNumber, T, K));
         droneGroupAggregate.setChild(droneGroupDeaggregate);
         droneGroupDeaggregate.setParent(droneGroupAggregate);
-
-        //new MoveAggregateEvent(droneGroupAggregate);
-        new WanderingEvent(droneGroupAggregate);
     }
 
     private ArrayList<Agent> formationInitialization(Context context, int agentsNumber, double T, double K){
@@ -68,5 +64,13 @@ abstract class DronesMRE {
         d1.add(droneGroupAggregate.deagreggationTimeMonitor, java.awt.Color.GREEN);
         System.out.println();
         d1.show();
+    }
+
+    public DroneGroupAggregate getDroneGroupAggregate() {
+        return droneGroupAggregate;
+    }
+
+    public DroneGroupDeaggregate getDroneGroupDeaggregate() {
+        return droneGroupDeaggregate;
     }
 }
