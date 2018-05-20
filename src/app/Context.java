@@ -9,7 +9,7 @@ import net.xeoh.plugins.base.annotations.PluginImplementation;
 @PluginImplementation
 public class Context extends BasicSimContext implements SimContextInterface {
 
-    public static final double TIME_STEP = 1.0;
+    public static final double TIME_STEP = 0.5;
     private SeekDronesMRE seekDronesMRE;
     private AttackDronesMRE attackDronesMRE;
 

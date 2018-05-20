@@ -25,9 +25,9 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
     private double maxForce = 5;
     private double maxSpeed = 25;
 
-    private double wanderRadius = 25.0;
-    private double wanderDistance = 5;
-    private double change = 1.5;
+    private double wanderRadius = 1.5;
+    private double wanderDistance = 10;
+    private double change = 0.7;
     private Point2D velocity = new Point2D(0.0,0.0);
     private Point2D acceleration = new Point2D(0.0,0.0);
 
@@ -40,16 +40,16 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
 
     @Override
     protected void transition() throws SimControlException {
+        wander();
         update();
-        seek(new Point2D(400.0,400.0));
     }
 
     private void wander(){
         wanderTheta += simGenerator.uniform(-change,change);
         Point2D circlePosition = velocity;
-        circlePosition.normalize();
-        circlePosition.multiply(wanderDistance);
-        circlePosition.add(agent.getPosition());
+        circlePosition = circlePosition.normalize();
+        circlePosition = circlePosition.multiply(wanderDistance);
+        circlePosition = circlePosition.add(agent.getPosition());
         double h = getAngle(velocity);
         Point2D circleOffSet = new Point2D(wanderRadius *Math.cos(wanderTheta+h),
                 wanderRadius *Math.sin(wanderTheta+h));
@@ -67,6 +67,26 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
         steer = limit(steer, maxForce);
 
         applyForce(steer);
+    }
+
+    private void arrive(Point2D target){
+        Point2D desired = target.subtract(agent.getPosition());
+        double d = desired.magnitude();
+
+        if( d < 100){
+            double m = map(d, 0 , 100,0, maxSpeed);
+            desired = desired.multiply(1.0/m);
+        }
+        else{
+            desired = desired.multiply(maxSpeed);
+        }
+        Point2D steer = desired.subtract(velocity);
+        steer = limit(steer, maxForce);
+        applyForce(steer);
+    }
+
+    static double map(double value, double start1, double stop1, double start2, double stop2) {
+        return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
     }
 
     private double getAngle(Point2D target) {
