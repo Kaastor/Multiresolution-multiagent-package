@@ -34,7 +34,14 @@ public class App extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
-                    visualization.updatePositions();
+//                try {
+//                    Thread.sleep(50);
+//
+//                }
+//                catch (InterruptedException e){
+//                    e.printStackTrace();
+//                }
+                visualization.updatePositions();
             }
         }.start();
 

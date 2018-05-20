@@ -7,6 +7,7 @@ import dissim.random.SimGenerator;
 import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
+import org.apache.log4j.Logger;
 
 
 import static app.Context.TIME_STEP;
@@ -14,28 +15,33 @@ import static app.Context.TIME_STEP;
 
 public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Object> {
 
+    private final Logger log = Logger.getLogger(WanderingEvent.class);
+
     private final SimGenerator simGenerator = new SimGenerator();
 
     private Agent agent;
     private double wanderTheta = 0;
-    private double maxForce = 0.1;
-    private double maxSpeed = 2.0;
+
+    private double maxForce = 5;
+    private double maxSpeed = 25;
+
     private double wanderRadius = 25.0;
-    private double wanderDistance = 10.0;
-    private double change = 2;
+    private double wanderDistance = 5;
+    private double change = 1.5;
     private Point2D velocity = new Point2D(0.0,0.0);
     private Point2D acceleration = new Point2D(0.0,0.0);
 
     public WanderingEvent(DroneGroupAggregate aggregate) throws SimControlException{
         super(aggregate);
         this.agent = aggregate.getAgent();
+        agent.setPosition(new Point2D(500,500));
         activateRepetition(TIME_STEP);
     }
 
     @Override
     protected void transition() throws SimControlException {
         update();
-        wander();
+        seek(new Point2D(400.0,400.0));
     }
 
     private void wander(){
@@ -48,20 +54,22 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
         Point2D circleOffSet = new Point2D(wanderRadius *Math.cos(wanderTheta+h),
                 wanderRadius *Math.sin(wanderTheta+h));
         Point2D target = circlePosition.add(circleOffSet);
+
         seek(target);
     }
 
-    void seek(Point2D target){
+    private void seek(Point2D target){
         Point2D desired = target.subtract(agent.getPosition());
         desired.normalize();
         desired.multiply(maxSpeed);
+
         Point2D steer = desired.subtract(velocity);
         steer = limit(steer, maxForce);
 
         applyForce(steer);
     }
 
-    public double getAngle(Point2D target) {
+    private double getAngle(Point2D target) {
         return Math.atan2(target.getY(), target.getX());
     }
 
@@ -69,7 +77,7 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
         velocity = velocity.add(acceleration);
         velocity = limit(velocity, maxSpeed);
         agent.setPosition(agent.getPosition().add(velocity));
-        acceleration.multiply(0);
+        acceleration = acceleration.multiply(0);
     }
 
     private void applyForce(Point2D force){

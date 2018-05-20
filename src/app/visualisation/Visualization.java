@@ -34,8 +34,8 @@ public class Visualization extends Pane {
         }
         else if(draw){
             for (int i = 0; i < agents.size(); i++) {
-                agentRepresentations.get(i).setCenterX(agents.get(i).getPosition().getX() * 15 + 300);
-                agentRepresentations.get(i).setCenterY(agents.get(i).getPosition().getY() * 15 + 300);
+                agentRepresentations.get(i).setCenterX(agents.get(i).getPosition().getX());
+                agentRepresentations.get(i).setCenterY(agents.get(i).getPosition().getY());
             }
         }
     }
