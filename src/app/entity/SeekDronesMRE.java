@@ -26,18 +26,18 @@ public class SeekDronesMRE extends DronesMRE{
 
     ArrayList<PositionVector> createPositionVectors(){
         ArrayList<PositionVector> positionVectors = new ArrayList<>();
-        positionVectors.add(new PositionVector(0,3, new Point2D(5,-5)));
-        positionVectors.add(new PositionVector(0,4, new Point2D(0,-5)));
-        positionVectors.add(new PositionVector(1,0, new Point2D(5,5)));
-        positionVectors.add(new PositionVector(1,4, new Point2D(5,0)));
-        positionVectors.add(new PositionVector(2,1, new Point2D(-5,5)));
-        positionVectors.add(new PositionVector(2,4, new Point2D(0,5)));
-        positionVectors.add(new PositionVector(3,2, new Point2D(-5,-5)));
-        positionVectors.add(new PositionVector(3,4, new Point2D(-5,0)));
-        positionVectors.add(new PositionVector(4,0, new Point2D(0,5)));
-        positionVectors.add(new PositionVector(4,1, new Point2D(-5,0)));
-        positionVectors.add(new PositionVector(4,2, new Point2D(0,-5)));
-        positionVectors.add(new PositionVector(4,3, new Point2D(5,0)));
+        positionVectors.add(new PositionVector(0,3, new Point2D(50,-50)));
+        positionVectors.add(new PositionVector(0,4, new Point2D(0,-50)));
+        positionVectors.add(new PositionVector(1,0, new Point2D(50,50)));
+        positionVectors.add(new PositionVector(1,4, new Point2D(50,0)));
+        positionVectors.add(new PositionVector(2,1, new Point2D(-50,50)));
+        positionVectors.add(new PositionVector(2,4, new Point2D(0,50)));
+        positionVectors.add(new PositionVector(3,2, new Point2D(-50,-50)));
+        positionVectors.add(new PositionVector(3,4, new Point2D(-50,0)));
+        positionVectors.add(new PositionVector(4,0, new Point2D(0,50)));
+        positionVectors.add(new PositionVector(4,1, new Point2D(-50,0)));
+        positionVectors.add(new PositionVector(4,2, new Point2D(0,-50)));
+        positionVectors.add(new PositionVector(4,3, new Point2D(50,0)));
 
         return positionVectors;
     }
