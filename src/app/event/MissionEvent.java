@@ -31,12 +31,10 @@ public class MissionEvent extends BasicSimStateChange<DroneGroupAggregate, Objec
 
     MissionEvent(DroneGroupAggregate aggregate, double delay) throws SimControlException{
         super(aggregate, delay);
-
         this.agent = aggregate.getAgent();
         target = new Point2D(simGenerator.uniform(SCENE_OFFSET, SCENE_WIDTH-SCENE_OFFSET),
                 simGenerator.uniform(SCENE_OFFSET, SCENE_HEIGHT-SCENE_OFFSET));
         activateRepetition(TIME_STEP);
-
     }
 
 

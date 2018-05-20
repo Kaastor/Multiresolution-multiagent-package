@@ -6,6 +6,7 @@ import app.entity.state.AggregationImpl;
 import app.entity.state.DeaggregationImpl;
 import app.visualisation.Visualization;
 import dissim.monitors.Diagram;
+import dissim.random.SimGenerator;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
@@ -18,8 +19,13 @@ import sim.resolution.IDeaggregation;
 
 import java.util.ArrayList;
 
+import static app.App.SCENE_HEIGHT;
+import static app.App.SCENE_OFFSET;
+import static app.App.SCENE_WIDTH;
+
 abstract class DronesMRE {
 
+    private SimGenerator simGenerator = new SimGenerator();
     private DroneGroupAggregate droneGroupAggregate;
     private DroneGroupDeaggregate droneGroupDeaggregate;
     private Network network = new Network();
@@ -39,8 +45,10 @@ abstract class DronesMRE {
     private ArrayList<Agent> formationInitialization(Context context, int agentsNumber, double T, double K){
         ArrayList<Agent> agents = new ArrayList<>();
         Color color =  Visualization.randomColor();
+        Point2D startingPoint = new Point2D(simGenerator.uniform(SCENE_OFFSET, SCENE_WIDTH-SCENE_OFFSET),
+                simGenerator.uniform(SCENE_OFFSET, SCENE_HEIGHT-SCENE_OFFSET));
         for(int i = 0 ; i < agentsNumber ; i++){
-            agents.add(new Agent(context, network, new Point2D(0.0,0.0), color, Visualization.DEAGGREGATE_CIRCLE_RADIUS));
+            agents.add(new Agent(context, network, startingPoint, color, Visualization.DEAGGREGATE_CIRCLE_RADIUS));
         }
         network.addAgents(agents);
         initializeNetwork();

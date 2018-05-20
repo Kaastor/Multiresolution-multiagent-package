@@ -42,6 +42,8 @@ public class AggregateFormationEvent extends BasicSimStateChange<Agent, Resoluti
                 DroneGroupAggregate aggregate = (DroneGroupAggregate)droneGroupDeaggregate.getParent();
                 aggregate.getAgent().setPosition(mean(droneGroupDeaggregate.getAgents()));
                 Visualization.addResolutionAgentsToDraw(aggregate.getAgents());
+
+                new WanderEvent(aggregate, 5.0);
             }
         }
 
