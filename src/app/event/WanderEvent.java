@@ -35,14 +35,18 @@ public class WanderEvent extends BasicSimStateChange<DroneGroupAggregate, Object
     private Point2D velocity = new Point2D(0.0,0.0);
     private Point2D acceleration = new Point2D(0.0,0.0);
     private double missionTime;
+    private double stopTime;
+
+    private MissionEvent mission;
 
     WanderEvent(DroneGroupAggregate aggregate, double delay) throws SimControlException{
         super(aggregate, delay);
         this.agent = aggregate.getAgent();
         circleRadius = agent.getGraphicRepresentation().getRadius();
         activateRepetition(TIME_STEP);
-        missionTime = simGenerator.uniformInt((int)simTime()+10, (int)simTime()+20);
-        new MissionEvent(aggregate, missionTime);
+        missionTime = simGenerator.uniformInt(20, 40);
+        stopTime = simTime()+missionTime;
+        mission = new MissionEvent(aggregate, missionTime);
     }
 
     public WanderEvent(DroneGroupAggregate aggregate) throws SimControlException {
@@ -54,11 +58,11 @@ public class WanderEvent extends BasicSimStateChange<DroneGroupAggregate, Object
         wander();
         update();
         borders();
-        if (simTime() == missionTime) {
+        if (simTime() == stopTime) {
             deactivateRepetition();
             this.terminate();
         }
-        log.warn(simTime() + " - " + agent.getId() + ": Wandering...");
+        log.warn(simTime() + " - " + agent.getId() + ": Wandering... " + missionTime);
     }
 
     private void wander(){
