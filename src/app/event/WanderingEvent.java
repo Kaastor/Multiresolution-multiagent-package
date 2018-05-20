@@ -10,6 +10,8 @@ import javafx.geometry.Point2D;
 import org.apache.log4j.Logger;
 
 
+import static app.App.SCENE_HEIGHT;
+import static app.App.SCENE_WIDTH;
 import static app.Context.TIME_STEP;
 
 
@@ -20,20 +22,22 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
     private final SimGenerator simGenerator = new SimGenerator();
 
     private Agent agent;
+    private double circleRadius;
     private double wanderTheta = 0;
 
     private double maxForce = 5;
     private double maxSpeed = 25;
 
     private double wanderRadius = 1.5;
-    private double wanderDistance = 10;
-    private double change = 0.7;
+    private double wanderDistance = 15;
+    private double change = 0.65;
     private Point2D velocity = new Point2D(0.0,0.0);
     private Point2D acceleration = new Point2D(0.0,0.0);
 
     public WanderingEvent(DroneGroupAggregate aggregate) throws SimControlException{
         super(aggregate);
         this.agent = aggregate.getAgent();
+        circleRadius = agent.getGraphicRepresentation().getRadius();
         agent.setPosition(new Point2D(500,500));
         activateRepetition(TIME_STEP);
     }
@@ -42,6 +46,7 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
     protected void transition() throws SimControlException {
         wander();
         update();
+        borders();
     }
 
     private void wander(){
@@ -85,7 +90,7 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
         applyForce(steer);
     }
 
-    static double map(double value, double start1, double stop1, double start2, double stop2) {
+    private double map(double value, double start1, double stop1, double start2, double stop2) {
         return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
     }
 
@@ -112,5 +117,29 @@ public class WanderingEvent extends BasicSimStateChange<DroneGroupAggregate, Obj
         else
             return vector;
     }
+
+    private void borders() {
+        if (agent.getPosition().getX() < -circleRadius) {
+            agent.setPosition(
+                    new Point2D(SCENE_WIDTH + circleRadius, agent.getPosition().getY())
+            );
+        }
+        if (agent.getPosition().getY() < -circleRadius) {
+            agent.setPosition(
+                    new Point2D(agent.getPosition().getX(), SCENE_HEIGHT + circleRadius)
+            );
+        }
+        if (agent.getPosition().getX() > SCENE_WIDTH + circleRadius) {
+            agent.setPosition(
+                    new Point2D(-circleRadius, agent.getPosition().getY())
+            );
+        }
+        if (agent.getPosition().getY() > SCENE_HEIGHT + circleRadius) {
+            agent.setPosition(
+                    new Point2D(agent.getPosition().getX(), -circleRadius)
+            );
+        }
+    }
+
 
 }

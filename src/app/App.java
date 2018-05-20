@@ -1,3 +1,5 @@
+package app;
+
 import app.visualisation.Visualization;
 import dissim.simspace.core.SimControlException;
 import dissim.simspace.core.SimModel;
@@ -13,8 +15,8 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static final double SIM_TIME_RATIO = 5.0;
-    private static final double SCENE_WIDTH = 1200;
-    private static final double SCENE_HEIGHT = 900;
+    public static final double SCENE_WIDTH = 1200;
+    public static final double SCENE_HEIGHT = 900;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
