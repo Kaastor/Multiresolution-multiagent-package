@@ -8,6 +8,7 @@ import dissim.simspace.core.BasicSimStateChange;
 import dissim.simspace.core.SimControlException;
 import javafx.geometry.Point2D;
 import org.apache.log4j.Logger;
+import sim.event.DeaggregationEvent;
 
 import static app.App.SCENE_HEIGHT;
 import static app.App.SCENE_OFFSET;
@@ -28,7 +29,7 @@ public class MissionEvent extends BasicSimStateChange<DroneGroupAggregate, Objec
     private Point2D acceleration = new Point2D(0.0,0.0);
     private Point2D target;
 
-    public MissionEvent(DroneGroupAggregate aggregate, double delay) throws SimControlException{
+    MissionEvent(DroneGroupAggregate aggregate, double delay) throws SimControlException{
         super(aggregate, delay);
 
         this.agent = aggregate.getAgent();
@@ -44,6 +45,12 @@ public class MissionEvent extends BasicSimStateChange<DroneGroupAggregate, Objec
         log.warn(simTime() + " - " + agent.getId() + ": Seeking target...");
         arrive(target);
         update();
+
+        if(agent.getPosition().distance(target) < 2.0){
+            deactivateRepetition();
+            this.terminate();
+            new DeaggregationEvent(getSimEntity(), 1.0);
+        }
     }
 
     private void arrive(Point2D target){

@@ -42,6 +42,7 @@ public class WanderEvent extends BasicSimStateChange<DroneGroupAggregate, Object
         circleRadius = agent.getGraphicRepresentation().getRadius();
         agent.setPosition(new Point2D(simGenerator.uniform(SCENE_OFFSET, SCENE_WIDTH-SCENE_OFFSET),
                 simGenerator.uniform(SCENE_OFFSET, SCENE_HEIGHT-SCENE_OFFSET)));
+
         activateRepetition(TIME_STEP);
 
         missionTime = simGenerator.uniformInt(10, 20);
